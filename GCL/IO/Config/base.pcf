@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <ConfigConverts>
+    <ConfigConvert name="ConfigConverts" type="GCL.IO.Config.ConfigConvert" dll="" />
+    <ConfigConvert name="AppSettings" type="GCL.IO.Config.AppSettingsConfigConvert" dll="" />
+    <ConfigConvert name="ConnectionStrings" type="GCL.IO.Config.ConnectionStringsConvert" dll="" />
+    <ConfigConvert name="Middler" type="GCL.Bean.Middler.NetMiddlerConfigConvert" dll="" />
+  </ConfigConverts>  
+</Config>

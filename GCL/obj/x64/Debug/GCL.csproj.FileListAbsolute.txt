@@ -1,0 +1,11 @@
+F:\baibing\work\GCL\GCL\bin\x64\Debug\x64\SQLite.Interop.dll
+F:\baibing\work\GCL\GCL\bin\x64\Debug\x86\SQLite.Interop.dll
+F:\baibing\work\GCL\GCL\bin\x64\Debug\GCL.dll
+F:\baibing\work\GCL\GCL\bin\x64\Debug\GCL.pdb
+F:\baibing\work\GCL\GCL\bin\x64\Debug\PublicClass.XML
+F:\baibing\work\GCL\GCL\bin\x64\Debug\ICSharpCode.SharpZipLib.dll
+F:\baibing\work\GCL\GCL\bin\x64\Debug\System.Data.SQLite.dll
+F:\baibing\work\GCL\GCL\bin\x64\Debug\System.Data.SQLite.Linq.dll
+F:\baibing\work\GCL\GCL\obj\x64\Debug\ResolveAssemblyReference.cache
+F:\baibing\work\GCL\GCL\obj\x64\Debug\GCL.dll
+F:\baibing\work\GCL\GCL\obj\x64\Debug\GCL.pdb

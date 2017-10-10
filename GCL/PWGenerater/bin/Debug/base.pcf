@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <ConfigConverts>
+    <ConfigConvert name="ConfigConverts" type="PublicClass.IO.Config.ConfigConvert" dll="" />
+    <ConfigConvert name="AppSettings" type="PublicClass.IO.Config.AppSettingsConfigConvert" dll="" />
+    <ConfigConvert name="ConnectionStrings" type="PublicClass.IO.Config.ConnectionStringsConvert" dll="" />
+    <ConfigConvert name="Middler" type="PublicClass.Bean.Middler.NetMiddlerConfigConvert" dll="" />
+    <ConfigConvert name="Ni" type="PublicClass.Db.Ni.NiConfigConvert" dll="" />
+  </ConfigConverts>  
+</Config>

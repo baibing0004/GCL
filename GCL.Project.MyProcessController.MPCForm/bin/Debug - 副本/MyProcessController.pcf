@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <add key="MyProcessController.Command" value="c:\b.txt {0}"/>
+  </AppSettings>
+  <Middler xmlns="http://tempuri.org/netmiddler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="MyProcessController" dll="GCL.dll" method="constructor" mode="static" package="GCL.IO.Log">
+      <!--Logger-->
+      <object name="logger" type=".Logger" method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type=".LogRecord">
+          <Enum value=".LogType.RELEASE"/>
+          <bool name="needDateTime"  value="true"/>
+          <bool name="needDiscript" value="true"/>
+          <bool name="needSeparator" value="false"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetListener" method="factory">
+          <Enum value=".LogType.RELEASE"/>
+          <Enum value=".LogType.WARN"/>
+          <object xmlns="" type="GCL.IO.Log.LoggerFactory.GetTextFileResource" method="factory">
+            <String value="\log\COMP{0}.log"/>
+            <String value="gb2312"/>
+            <int value="1"/>
+            <int value="10000000"/>
+            <String value="0 0 * * * ?"/>
+            <String value="{0:yyyyMMddHH}"/>
+          </object>
+        </object>
+        <!--<object xmlns="" name="Listener" type=".LoggerFactory.GetConsoleListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <Enum value=".LogType.TEST"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetWindowEventListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <String value=""/>
+          <String value="Logger"/>
+        </object>-->
+      </object>
+      <!--获取对象-->
+      <objects name="Servers">
+        <!--车机-->
+        <object xmlns="" ref="COMP/COMPSocketPoolServer"/>
+        <object xmlns="" ref="COMP/ReceiveNormalPoolServer"/>
+        <object xmlns="" ref="COMP/SendMSMQPoolServer" />
+        <object xmlns="" ref="COMP/PrcOtherMSMQPoolServer" />
+        <object xmlns="" ref="COMP/SyncMSMQPoolServer" />
+        <object xmlns="" ref="COMP/SyncPollPoolServer" />
+       <!--省网-->
+        <object xmlns="" ref="PLAT/COMPPlatSocketPoolServer"/>
+        <object xmlns="" ref="PLAT/OtherPlatReceiveNormalPoolServer"/>
+        <object xmlns="" ref="PLAT/SendOtherPlatMSMQPoolServer" />
+        <object xmlns="" ref="PLAT/PrcOtherPlatMSMQPoolServer" />
+        <object xmlns="" ref="PLAT/SyncOtherPlatMSMQPoolServer" />
+        <object xmlns="" ref="PLAT/SyncOtherPlatPollPoolServer" />
+      </objects>
+    </app>
+    <app name="COMP" method="constructor" mode="static" dll="COMPServer.dll" package="COMPServer">
+      <object name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+        <object xmlns="" name="type" dll="" type="System.Type.GetType" method="factory">
+          <String xmlns="" value="COMPModule.NormalProtocolMessage,COMPModule"></String>
+        </object>
+      </object>
+      <object name="COMPSocketPoolServer" type=".COMPSocketPoolServer">
+        <String xmlns="" name ="serverIp" value="10.120.10.52" />
+        <int xmlns="" name="port" value="7743" />
+        <int xmlns="" name="rsTimeOut" value="500" />
+        <int xmlns="" name="rsBuffer" value="8196" />
+        <int xmlns="" name="createrNum" value="1" />
+        <int xmlns="" name="createrWaittime" value="500" />
+        <int xmlns="" name="customerNum" value="1" />
+        <int xmlns="" name="customerWaittime" value="500" />
+        <int xmlns="" name="refreshWaittime" value="10000" />
+        <int xmlns="" name="buf" value="3072" />
+        <int xmlns="" name="rb" value="3072" />
+      </object>
+      <object name ="ReceiveNormalPoolServer" type=".ReceiveNormalPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="promsmq" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compproc"/>
+        <String xmlns="" name="syncmsmq" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsync"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="10000"/>
+      </object>
+      <object name="SendMSMQPoolServer" type=".SendMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsend"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsend"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="10000"/>
+      </object>
+      <object name="redisclient" type="ServiceStack.Redis.RedisClient" dll="ServiceStack.Redis.dll" mode="instance">
+        <!--TODO-->
+        <String xmlns="" name="host" value="10.120.10.52"/>
+        <int xmlns="" name="port" value="6379"/>
+      </object>
+      <object name="ProOtherPlatMSMQPoolServer.RedisClient" type="ServiceStack.Redis.RedisClient" dll="ServiceStack.Redis.dll" mode="instance">
+        <!--TODO-->
+        <String xmlns="" name="host" value="10.120.10.52"/>
+        <int xmlns="" name="port" value="6379"/>
+      </object>      
+      <object name="PrcOtherMSMQPoolServer" type=".PrcOtherMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <object xmlns="" ref="redisclient"></object>
+        <Array xmlns="" name="sendPaths" type="String">
+          <String name="" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsend" />
+        </Array>
+        <Array xmlns="" name="syncPaths" type="String">
+          <String name="" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsync" />
+        </Array>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compproc"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compproc"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="SyncMSMQPoolServer" type=".SyncMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <object xmlns="" ref="redisclient"></object>
+        <Array xmlns="" name="sendPaths" type="String">
+          <String name="" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsend" />
+        </Array>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsync"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsync"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="20"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="SyncPollPoolServer" type=".SyncPollPoolServer">
+        <String xmlns="" name="SPName" value="usp_COMP_GetSendCommands" />
+        <int xmlns="" name="capacity" value="50"/>
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\compsend"/>
+        <int xmlns="" name="createrNum" value="2"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="COMPModule.COMPProtocolStatck.Instance" type="COMPModule.COMPProtocolStack" dll="COMPModule.dll" method="bean">
+        <Params xmlns="" name="IDIC">
+          <String name="终端标准上行" value="1"/>
+          <object name="" type="COMPModule.Car.ox0001Protocol"></object>
+        </Params>
+        <Params xmlns="" name="IDIC">
+          <String name="终端鉴权" value="258"/>
+          <object name="" type="COMPModule.Car.ox0102Protocol">
+            <String name="SPName" value ="usp_COMP_Proc0102" />
+          </object>
+        </Params>
+        <Params xmlns="" name="IDIC">
+          <String name="平台标准下行" value="32769"/>
+          <object name="" type="COMPModule.Car.ox8001Protocol"></object>
+        </Params>
+        <Params xmlns="" name="IDIC">
+          <String name="分包补传命令" value="32771"/>
+          <object name="" type="COMPModule.Car.ox8003Protocol"></object>
+        </Params>
+      </object>
+    </app>
+    <app name="PLAT" method="constructor" mode="static" dll="COMPServer.dll" package="COMPServer.PlatServer">
+      <object name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+        <object xmlns="" name="type" dll="" type="System.Type.GetType" method="factory">
+          <String xmlns="" value="COMPModule.NormalProtocolMessage,COMPModule"></String>
+        </object>
+      </object>
+      <object name="COMPPlatSocketPoolServer" type=".COMPPlatSocketPoolServer">
+        <int xmlns="" name="maxReaderLines" value="500" />
+        <int xmlns="" name ="resendTimes" value="3"/>
+        <String xmlns="" name ="serverIp" value="10.120.10.51" />
+        <int xmlns="" name="port" value="7743" />
+        <int xmlns="" name="rsTimeOut" value="500" />
+        <int xmlns="" name="rsBuffer" value="8196" />
+        <int xmlns="" name="createrNum" value="1" />
+        <int xmlns="" name="createrWaittime" value="500" />
+        <int xmlns="" name="customerNum" value="1" />
+        <int xmlns="" name="customerWaittime" value="500" />
+        <int xmlns="" name="refreshWaittime" value="10000" />
+      </object>
+      <object name ="OtherPlatReceiveNormalPoolServer" type=".OtherPlatReceiveNormalPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="procmsmq" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platproc"/>
+        <String xmlns="" name="sendmsmq" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platsend"/>
+        <String xmlns="" name="syncmsmq" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platsync"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="10000"/>
+        <int xmlns="" name="createWaitTime" value="500"/>
+      </object>
+
+      <object name="SendOtherPlatMSMQPoolServer" type=".SendOtherPlatMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platsend"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platsend"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="10000"/>
+      </object>
+
+      <object name="redisclient" type="ServiceStack.Redis.RedisClient" dll="ServiceStack.Redis.dll" mode="instance">
+        <!--TODO-->
+        <String xmlns="" name="host" value="10.120.10.51"/>
+        <int xmlns="" name="port" value="6379"/>
+      </object>
+
+      <object name="PrcOtherPlatMSMQPoolServer" type=".PrcOtherPlatMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <Array xmlns="" name="sendPaths" type="String">
+          <String name="" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platsend" />
+        </Array>
+        <Array xmlns="" name="syncPaths" type="String">
+          <String name="" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platsync" />
+        </Array>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platproc"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.51\private$\platproc"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="SyncOtherPlatMSMQPoolServer" type=".SyncOtherPlatMSMQPoolServer">
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platsync"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platsync"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="20"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="SyncOtherPlatPollPoolServer" type=".SyncOtherPlatPollPoolServer">
+        <int xmlns="" name="maxFetchCount" value="500" />
+        <String xmlns="" name="SPName" value="usp_PLAT_GetSendCommands" />
+        <int xmlns="" name="capacity" value="50"/>
+        <object xmlns="" ref="formatterStaregy"></object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:10.120.10.52\private$\platsend"/>
+        <int xmlns="" name="createrNum" value="2"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="10"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+    </app>
+  </Middler>
+</Config>

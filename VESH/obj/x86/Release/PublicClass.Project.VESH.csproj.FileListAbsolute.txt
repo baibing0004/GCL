@@ -1,0 +1,9 @@
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\base.pcf
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\web.pcf
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\VESH.dll
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\VESH.pdb
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\PublicClass.dll
+F:\baibing\work\PublicClass\VESH\bin\x86\Release\PublicClass.xml
+F:\baibing\work\PublicClass\VESH\obj\x86\Release\ResolveAssemblyReference.cache
+F:\baibing\work\PublicClass\VESH\obj\x86\Release\VESH.dll
+F:\baibing\work\PublicClass\VESH\obj\x86\Release\VESH.pdb

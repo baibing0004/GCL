@@ -1,0 +1,530 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyProcessController</name>
+    </assembly>
+    <members>
+        <member name="T:PublicClass.Project.MyProcessController.IJob">
+            <summary>
+            Job职务
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IJob.Init(System.Object,PublicClass.Event.EventArg)">
+            <summary>
+            初始化
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IJob.Action(System.Object,PublicClass.Event.EventArg)">
+            <summary>
+            定点执行的数据
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IJob.Close(System.Object,PublicClass.Event.EventArg)">
+            <summary>
+            任务关闭时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.CronExpressionJob">
+            <summary>
+            克隆表达式Job的基类
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.CronExpressionJob.#ctor(System.String,PublicClass.Project.MyProcessController.IJob)">
+            <summary>
+            克隆表达式基类
+            </summary>
+            <param name="cronExpression"></param>
+            <param name="job"></param>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.CronJobThreadServer">
+            <summary>
+            用于管理多个克隆表达式定义的触发器，任务
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.ABusinessThreadServer">
+            <summary>
+            单线程插件类，继承基本插件类
+            只需要初始化时设置不同的线程类（安全/循环/定时）可以实现对Action方法不同的调用
+            不需要处理init(),start(),stop()等操作，不需要注意CallProcessEvent传出状态
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.ABusinessServer">
+            <summary>
+            基本插件类
+            需要处理init(),start(),stop()等操作，注意CallProcessEvent传出状态
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessServer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessServer.#ctor(System.String)">
+            <summary>
+            便于外部设定日志格式化字符串
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessServer.CallDispose">
+            <summary>
+            呼叫外部程序关闭
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessServer.AlarmFormat(System.String,System.Object,System.Boolean)">
+            <summary>
+            格式化错误报警,当节点不存在时抱错！
+            </summary>
+            <param name="key">节点名</param>
+            <param name="content">内容</param>
+            <param name="isAbPath">节点是否是全路径（否的情况下默认为"类名."开头）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessServer.AlarmFormat(System.String,System.Object)">
+            <summary>
+            格式化错误报警，当节点不存在时抱错！
+            </summary>
+            <param name="key">节点名</param>
+            <param name="content">内容</param>
+            <param name="isAbPath">节点是否是全路径（默认为"类名."开头）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.#ctor(System.String)">
+            <summary>
+            便于外部设定日志格式化字符串
+            </summary>
+            <param name="formatter"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.#ctor(PublicClass.Threading.ProtectThread)">
+            <summary>
+            设定执行线程
+            </summary>
+            <param name="thread"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.#ctor(System.String,PublicClass.Threading.ProtectThread)">
+            <summary>
+            设定执行线程
+            </summary>
+            <param name="formatter"></param>
+            <param name="thread"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.FirstRun">
+            <summary>
+            初次运行
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ABusinessThreadServer.Action(System.Object,PublicClass.Event.EventArg)">
+            <summary>
+            循环业务处理内容
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.CronJobThreadServer.#ctor(System.Int32,System.String)">
+            <summary>
+            记录间隔时间，最小30秒,单位毫秒
+            </summary>
+            <param name="waitTime"></param>
+            <param name="formatter"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.CronJobThreadServer.#ctor(System.Int32)">
+            <summary>
+            记录间隔时间，最小30秒，单位毫秒
+            </summary>
+            <param name="waitTime"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.CronJobThreadServer.SetQueryOrder(PublicClass.Project.MyProcessController.CronExpressionJob)">
+            <summary>
+            设置其检索顺序
+            </summary>
+            <param name="job"></param>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.NetMessageQueue">
+            <summary>
+            使用.Net封装的消息队列对象
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.IMessageQueue">
+            <summary>
+            消息队列接口
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IMessageQueue.ReSet">
+            <summary>
+            重设连接
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IMessageQueue.Receive(System.TimeSpan)">
+            <summary>
+            接收 如果timeSpan为空，那么一直等待
+            </summary>
+            <param name="timeSpan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IMessageQueue.Send(System.Object)">
+            <summary>
+            发送对象
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IMessageQueue.Close">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.IMessageQueue.GetDescription">
+            <summary>
+            主要用于提供描述 比如消息队列地址等等信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.NetMessageQueue.GenerateQueue">
+            <summary>
+            用于重新生成一个.Net消息队列对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.NetMessageQueueFactory">
+            <summary>
+            用于重复产生某个消息队列的消息队列对象实例
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.IMessageQueueFactory">
+            <summary>
+            生产工厂接口
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.ASocketPoolServer">
+             <summary>
+             Socket服务器端池处理类
+             继承APoolServer后在Custom方法中获得是TcpClient对象
+            <add key="你的类.ServerIP" value="10.0.100.70"/>
+            <add key="你的类.Port" value="5678"/>
+             </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.APoolServer">
+            <summary>
+            池控制多线程插件类，继承基本插件类
+            只需要节点内设置设置属性，即可以使用池控制的多线程管理，实现Create,Custom,RollBack,OnClose方法实现数据产生与处理，回滚与消除等逻辑
+            不需要处理init(),start(),stop()等操作，不需要注意CallProcessEvent传出状态
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.APoolServer.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构造函数 请注意这里只对消费者线程进行池管理。
+            </summary>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.APoolServer.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构造函数 请注意这里只对消费者线程进行池管理。
+            这个构造方法允许生产数据时有等待时间，也就是说当待处理数据并不为空时也需要等待的时间
+            </summary>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ASocketPoolServer.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="serverIp">监听地址</param>
+            <param name="port">监听端口</param>
+            <param name="rsTimeOut">接收超时时间</param>
+            <param name="rsBuffer">接收缓冲区</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ASocketPoolServer.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="serverIp">监听地址</param>
+            <param name="port">监听端口</param>
+            <param name="rsTimeOut">接收超时时间</param>
+            <param name="rsBuffer">接收缓冲区</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.AFilePoolServer">
+            <summary>
+            需要设置
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.AFilePoolServer.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="path">要遍历的文件夹路径</param>
+            <param name="minCapacity">文件队列最小容量，当文件队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.AFilePoolServer.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="path">要遍历的文件夹路径</param>
+            <param name="minCapacity">文件队列最小容量，当文件队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.AFilePoolServer.isSelect">
+            <summary>
+            isOver是否已经没有数据等待结束，是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="P:PublicClass.Project.MyProcessController.AFilePoolServer.IsSelect">
+            <summary>
+            是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.TimerJobThreadServer">
+            <summary>
+            定时Job服务
+            </summary>
+        </member>
+        <!-- 对于成员“T:PublicClass.Project.MyProcessController.AMSMQPoolServer”忽略有格式错误的 XML 注释 -->
+        <member name="M:PublicClass.Project.MyProcessController.AMSMQPoolServer.#ctor(PublicClass.Project.MyProcessController.MSMQPoolServerStaregy,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="formatterStaregy">格式化策略对象</param>
+            <param name="msmqPath">读取消息队列路径</param>
+            <param name="backMsmqPath">备用消息队列路径</param>
+            <param name="timeOut">等待超时</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.AMSMQPoolServer.#ctor(PublicClass.Project.MyProcessController.MSMQPoolServerStaregy,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="formatterStaregy">格式化策略对象</param>
+            <param name="msmqPath">读取消息队列路径</param>
+            <param name="backMsmqPath">备用消息队列路径</param>
+            <param name="timeOut">等待超时</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.ADBPoolServer">
+            <summary>
+            DBPool业务类，其Creater设置应该大于1.
+            IDictionary idic = value as IDictionary;
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ADBPoolServer.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="minCapacity">数据队列最小容量，当数据队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ADBPoolServer.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="minCapacity">数据队列最小容量，当数据队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.ADBPoolServer.isSelect">
+            <summary>
+            isOver是否已经没有数据等待结束，是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="P:PublicClass.Project.MyProcessController.ADBPoolServer.IsSelect">
+            <summary>
+            是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.ATextFilePoolServer">
+            <summary>
+            主要用于逐行处理Text文件内容
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ATextFilePoolServer.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="path">要遍历的文件夹路径</param>
+            <param name="minCapacity">文件队列最小容量，当文件队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="delpath">处理文件夹，同时也是备份文件夹 默认将原文件名前加上日期时分秒</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ATextFilePoolServer.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="path">要遍历的文件夹路径</param>
+            <param name="minCapacity">文件队列最小容量，当文件队列小于此容量时，生产者自动添加新目录下文件</param>
+            <param name="delpath">处理文件夹，同时也是备份文件夹 默认将原文件名前加上日期时分秒</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.ATextFilePoolServer.isSelect">
+            <summary>
+            isOver是否已经没有数据等待结束，是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ATextFilePoolServer.GetReader(System.IO.FileInfo)">
+            <summary>
+            获取Reader
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.ATextFilePoolServer.RemoveFile(System.IO.FileInfo)">
+            <summary>
+            处理读完的文件
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="P:PublicClass.Project.MyProcessController.ATextFilePoolServer.IsSelect">
+            <summary>
+            是否正在有人读取信息
+            </summary>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.BClass.logger">
+            <summary>
+            日志记录者
+            </summary>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.BClass.servers">
+            <summary>
+            服务
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.#ctor">
+            <summary>
+            默认所有的都可以
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.Init">
+            <summary>
+            读取配置信息
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.Start">
+            <summary>
+            初始化设备 并启动收发和处理线程.
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.Stop">
+            <summary>
+            关闭收发和处理线程
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.TestAlarm(System.String)">
+            <summary>
+            发送短信信息
+            </summary>
+            <param name="phone"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.RecordLog(System.String)">
+            <summary>
+            安全纪录日志信息
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.BClass.CloseLog">
+            <summary>
+            关闭日志
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.MessageQueueCommonException">
+            <summary>
+            这个错误外层不会做ReSet处理，仅仅提示信息，但除此以外的错误会调用消息队列ReSet方法重置队列！
+            </summary>
+        </member>
+        <member name="T:PublicClass.Project.MyProcessController.AMQPoolServer">
+            <summary>
+            通用消息队列处理程序！
+            </summary>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.AMQPoolServer.backQueue">
+            <summary>
+            备份消息队列
+            </summary>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.AMQPoolServer.queues">
+            <summary>
+            接收用消息队列数组
+            </summary>
+        </member>
+        <member name="F:PublicClass.Project.MyProcessController.AMQPoolServer.queueFactory">
+            <summary>
+            消息队列工厂
+            </summary>
+        </member>
+        <member name="M:PublicClass.Project.MyProcessController.AMQPoolServer.#ctor(PublicClass.Project.MyProcessController.IMessageQueueFactory,PublicClass.Project.MyProcessController.IMessageQueue,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="factory">消息队列工厂（接收用）</param>
+            <param name="backQueue">备份消息队列</param>
+            <param name="timeOut">生产超时等待时间</param>
+            <param name="createrNum">生产者最大值</param>
+            <param name="createrWaittime">生产数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="customerNum">消费数据者线程数</param>
+            <param name="customerWaittime">消费数据者线程无数据时等待时间（单位 毫秒）</param>
+            <param name="refreshWaittime">消费数据者线程过期时间（单位 毫秒）</param>
+            <param name="createWaitTime">生产数据者线程生产数据时等待时间（单位 毫秒）</param>
+        </member>
+    </members>
+</doc>

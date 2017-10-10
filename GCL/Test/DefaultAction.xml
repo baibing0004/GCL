@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config ns="http://www.w3c.org/transform">
+  <action name="reboot">
+    <user>telnet</user>
+    <password>ChinaHR</password>
+    <file name="telnet.bat" value="@echo off
+      start telnet.exe
+      cscript //nologo DoExe{0}.vbs
+      exit"/>    
+    <file name="DoExe.vbs" value="set sh=WScript.CreateObject(&quot;WScript.Shell&quot;)
+						sh.SendKeys &quot;open {0}{ENTER}&quot;
+						WScript.Sleep 5000
+						sh.SendKeys &quot;{1}{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{2}{ENTER}&quot;
+						WScript.Sleep 2000
+
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+            sh.SendKeys &quot;{3}{ENTER}&quot;
+						WScript.Sleep 10000
+						sh.SendKeys &quot;{ENTER}&quot;
+						sh.SendKeys &quot;{ENTER}&quot;
+						sh.SendKeys &quot;exit{ENTER}&quot;
+						sh.SendKeys &quot;quit{ENTER}&quot;" />
+  </action>
+  <action name="restart">
+    <user>telnet</user>
+    <password>ChinaHR</password>
+    <file name="telnet.bat" value="@echo off
+      start telnet.exe
+      cscript //nologo DoExe{0}.vbs
+      exit"/>
+    <file name="DoExe.vbs" value="set sh=WScript.CreateObject(&quot;WScript.Shell&quot;)
+						sh.SendKeys &quot;open {0}{ENTER}&quot;
+						WScript.Sleep 5000
+						sh.SendKeys &quot;{1}{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{2}{ENTER}&quot;
+						WScript.Sleep 2000
+
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+						sh.SendKeys &quot;{ENTER}&quot;
+						WScript.Sleep 2000
+            sh.SendKeys &quot;{3}{ENTER}&quot;
+						WScript.Sleep 10000
+						sh.SendKeys &quot;{ENTER}&quot;
+						sh.SendKeys &quot;{ENTER}&quot;
+						sh.SendKeys &quot;exit{ENTER}&quot;
+						sh.SendKeys &quot;quit{ENTER}&quot;" />
+  </action>
+</config>

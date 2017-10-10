@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <add key="MyProcessController.Command" value="c:\b.txt {0}"/>
+  </AppSettings>
+  <Middler xmlns="http://tempuri.org/netmiddler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="MyProcessController" dll="GCL.dll" method="constructor" mode="static" package="GCL.IO.Log">
+      <!--Logger-->
+      <object name="logger" type=".Logger" method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type=".LogRecord">
+          <Enum value=".LogType.INFO"/>
+          <bool name="needDateTime"  value="true"/>
+          <bool name="needDiscript" value="true"/>
+          <bool name="needSeparator" value="false"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetListener" method="factory">
+          <Enum value="GCL.IO.Log.LogType.RELEASE"/>
+          <Enum value="GCL.IO.Log.LogType.INFO"/>
+          <object xmlns="" type="GCL.IO.Log.LoggerFactory.GetTextFileResource" method="factory">
+            <String value="\log\{0}.log"/>
+            <String value="gb2312"/>
+            <int value="1"/>
+            <int value="10000000"/>
+            <String value="0 0 * * * ?"/>
+            <String value="{0:yyyyMMddHH}"/>
+          </object>
+        </object>
+        <!--<object xmlns="" name="Listener" type=".LoggerFactory.GetConsoleListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <Enum value=".LogType.TEST"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetWindowEventListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <String value=""/>
+          <String value="Logger"/>
+        </object>-->
+      </object>
+      <!--获取对象-->
+      <objects name="Servers">
+        <object xmlns="" ref="Servers/MailDBDealer"/>
+        <object xmlns="" ref="Servers/MailMSMQDealer1"/>
+        <object xmlns="" ref="Servers/MailMSMQDealer2"/>
+        <object xmlns="" ref="Servers/MailMSMQDealer3"/>
+        <object xmlns="" ref="Servers/CaseMSMQDealer1"/>
+        <object xmlns="" ref="Servers/CaseMSMQDealer2"/>
+      </objects>
+    </app>
+    <app name="Servers" dll="cv.zc.Module.dll" method="constructor" mode="static" >
+      <object name="MailDBDealer" type="cv.zc.Module.MailDBDealer">
+        <Int32 name="minCapacity" value="10"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="500"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+        <String name="username" value="info@gbviewtech.com" />
+        <String name="pwd" value="GbPass@word!" />
+        <String name="host" value="smtp.gbviewtech.com" />
+        <Int32 name="port" value="25"/>
+        <String name="msmqname" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailUnSend" />
+      </object>
+      <object name="MailMSMQDealer1" type="cv.zc.Module.MailMSMQDealer">
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="cv.zc.Module.MailSender,cv.zc.Module"></String>
+          </object>
+        </object>
+        <String name="msmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailUnSend" />
+        <String name="backMsmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailSend2" />
+        <int xmlns="" name="timeOut" value="500"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="500"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="MailMSMQDealer2" type="cv.zc.Module.MailMSMQDealer">
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="cv.zc.Module.MailSender,cv.zc.Module"></String>
+          </object>
+        </object>
+        <String name="msmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailSend2" />
+        <String name="backMsmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailSend3" />
+        <int xmlns="" name="timeOut" value="500"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="5000"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="MailMSMQDealer3" type="cv.zc.Module.MailMSMQDealer">
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="cv.zc.Module.MailSender,cv.zc.Module"></String>
+          </object>
+        </object>
+        <String name="msmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailSend3" />
+        <String name="backMsmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\MailSend3" />
+        <int xmlns="" name="timeOut" value="500"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="50000"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+      </object>
+      <object name="CaseMSMQDealer1" type="cv.zc.Module.CaseMSMQDealer">
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="cv.zc.Module.CaseInfo,cv.zc.Module"></String>
+          </object>
+        </object>
+        <String name="msmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\CaseUnZip" />
+        <String name="backMsmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\CaseZip" />
+        <int xmlns="" name="timeOut" value="500"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="500"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+        <String name="format" value="F:\\baibing\\work\\cv\\zc\\cv.zc.Web\\upload\\{0}" />
+      </object>
+      <object name="CaseMSMQDealer2" type="cv.zc.Module.CaseMSMQDealer">
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="cv.zc.Module.CaseInfo,cv.zc.Module"></String>
+          </object>
+        </object>
+        <String name="msmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\CaseZip" />
+        <String name="backMsmqPath" value="FormatName:DIRECT=TCP:127.0.0.1\private$\CaseZip" />
+        <int xmlns="" name="timeOut" value="500"/>
+        <Int32 name="createrNum" value="1"/>
+        <Int32 name="createrWaittime" value="5000"/>
+        <Int32 name="customerNum" value="2"/>
+        <Int32 name="customerWaittime" value="500"/>
+        <Int32 name="refreshWaittime" value="60000"/>
+        <String name="format" value="F:\\baibing\\work\\cv\\zc\\cv.zc.Web\\upload\\{0}" />
+      </object>
+    </app>
+    <app name="Ni" method="constructor" mode="static" dll="GCL.dll" package="GCL.Db.Ni">
+      <object name="sqlfactory" type=".SqlFactory"></object>
+      <object name="odbcfactory" type=".ODBCFactory"></object>
+      <object name="oledbfactory" type=".OleDbFactory"></object>
+      <object name="mysqlfactory" type=".MySQLFactory"></object>
+      <object name="sqliteFactory" type=".SQLiteFactory"></object>
+      <object name="mongoFactory" type=".MongoDbFactory">
+        <object name="" type=".NoSQL.LSqlParser"></object>
+      </object>
+      <object name="redisFactory" type=".RedisDbFactory">
+        <object name="" type=".NoSQL.LSqlParser"></object>
+      </object>
+      <object name="memFactory" type=".MemDbFactory">
+        <object name="" type=".NoSQL.LSqlParser"></object>
+      </object>
+      <object name="objFactory" type=".ObjectDbFactory">
+        <This xmlns=""></This>
+      </object>
+      <object name="ma" type="GCL.IO.Config.ConfigManagerFactory.GetConfigManagerFromDirectory" method="factory" >
+        <object xmlns="" type="GCL.IO.Config.ConfigManagerFactory.GetBassConfigManager" method="factory"/>
+        <String xmlns="" value=".\Ni\*.ni"/>
+      </object>
+      <object name="parameters" type=".NiDataParameters"></object>
+      <object name="template" type=".NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="resource"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+        <!--<bool name="Transaction" value="True"/>-->
+      </object>
+      <object name="factory" type=".SqlFactory"></object>
+      <object name="res" type=".NiInstanceDataResource">
+        <object xmlns="" ref="sqlfactory"/>
+        <String xmlns="" name="" value="Password=12%%aCDg124;Persist Security Info=True;User ID=PartnerDev;Initial Catalog=YinTaiPartner;Data Source=10.32.11.23,14103"/>
+      </object>
+
+      <object name="res1" type=".NiInstanceDataResource">
+        <object xmlns="" ref="sqlfactory"/>
+        <String xmlns="" name="" value="Data Source=10.32.11.23,14331;Initial Catalog=YinTaiCommon;MultipleActiveResultSets=True;user id=DBQuery;Password=yintai@123;Application Name=KuaiDian_HTML5"/>
+      </object>
+      <object name="memresource" type=".NiInstanceDataResource">
+        <object xmlns="" ref="memFactory"/>
+        <String xmlns="" name="" value="ServerIp=127.0.0.1:11211;DateTime=3600"/>
+      </object>
+      <object name="memcode" type=".NiInstanceDataResource">
+        <object xmlns="" ref="memFactory"/>
+        <String xmlns="" name="" value="ServerIp=127.0.0.1:11211;DateTime=600"/>
+      </object>
+      <object name="mongoresource" type=".NiInstanceDataResource">
+        <object xmlns="" ref="mongoFactory"/>
+        <String xmlns="" name="" value="mongodb://127.0.0.1:27017/test"/>
+      </object>
+      <object name="Cache" type=".NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="memresource"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="Cache1" type=".NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="memcode"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="redisresource" type=".NiInstanceDataResource">
+        <object xmlns="" ref="redisFactory"/>
+        <!--<String name="" value="Driver={sql server};server=bin\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <String xmlns="" name="" value="Redis=127.0.0.1:6379,10.0.0.132:6379;DateTime=100;"/>
+        <!--<String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=bin\LXR"/>-->
+      </object>
+      <object name="decorator" type=".NiTemplateDecorator" method="constructor" mode="instance" constructorparalength="4">
+        <object xmlns="" name="" ref="memresource"/>
+        <object xmlns="" name="" ref="res"/>
+        <!--<object xmlns="" name="" ref="sqliteresource"/>-->
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="resource" type=".NiInstanceDataResource">
+        <object xmlns="" ref="sqlfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <String xmlns="" name="" value="Password=pass@word1;Persist Security Info=True;User ID=sa;Initial Catalog=SSIDB-DEV;Data Source=."/>
+        <!--<String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+      </object>
+      <object name="poolresource" type=".NiPoolDataResource">
+        <object xmlns="" ref="oledbfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <!--<String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+        <String xmlns="" value="Provider=SQLOLEDB.1;Password=pass@word1;Persist Security Info=True;User ID=sa;Initial Catalog=SSIDB-DEV;Data Source=."/>
+        <!--<object xmlns="" dll="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" method="constructor" mode="instance" type="System.Collection.ArrayList">
+          <Array xmlns="" name="connstrings" type="string">
+            <String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+          </Array>
+        </object>-->
+        <int xmlns="" value="2" />
+      </object>
+      <object name="obj" type=".NiTemplate" method="constructor" mode="instance">
+        <object name="resource" type=".NiInstanceDataResource">
+          <object xmlns="" ref="objFactory"/>
+          <String xmlns="" name="" value="Module/Method"/>
+        </object>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="r_ac" type=".NiTemplate" method="constructor" mode="instance">
+        <object name="resource" type=".NiInstanceDataResource">
+          <object xmlns="" ref="mysqlfactory"/>
+          <String xmlns="" name="" value="Server=127.0.0.1;Port=3306;Database=cv_zc;Uid=root2;Pwd=111111;pooling=true;charset=utf8;oldsyntax=true;"/>
+        </object>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="w_ac" type=".NiTemplate" method="constructor" mode="instance">
+        <object name="resource" type=".NiInstanceDataResource">
+          <object xmlns="" ref="mysqlfactory"/>
+          <String xmlns="" name="" value="Server=127.0.0.1;Port=3306;Database=cv_zc;Uid=root2;Pwd=111111;pooling=true;charset=utf8;oldsyntax=true;"/>
+        </object>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+      </object>
+      <object name="MT" type=".NiMuliteTemplateDecorator" method="constructor" mode="instance">
+        <object xmlns="" name="" ref="memresource"/>
+        <object xmlns="" name="" ref="res"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+        <This xmlns=""></This>
+      </object>
+      <object name="wsfactory" type="GCL.Project.VESH.Db.Ni.WebSocketDB.WebSocketDbFactory" dll="bin/VESH.dll"></object>
+      <object name="wsresourcer" type=".NiInstanceDataResource">
+        <object xmlns="" ref="wsfactory"/>
+        <String xmlns="" name="" value="8181"/>
+      </object>
+      <object name="ws" type=".NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="wsresourcer"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+        <!--<bool name="Transaction" value="True"/>-->
+      </object>
+    </app>
+  </Middler>
+</Config>

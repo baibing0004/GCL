@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Ni>
+    <!--
+    name:命令名
+    type:CommandType枚举值：StoredProcedure,TableDirect,Text 不填写默认值为StoredProcedure
+    template:template名 仅限MuilteTempldate使用
+    -->
+    <Command name="" type="" template="">
+      <!--命令内容-->
+      <Content><![CDATA[]]></Content>
+      <!--
+      标签默认为可以解析的参数类型,默认情况下先寻找System.Data.DbType枚举中的属性，然后再根据其具体数据库类型，进行类型转换。这里大小写不敏感
+      name:参数名 请记住需要添加@，如果不添加，那么系统自动添加
+      Nullable:true/false 是否允许为空，默认不允许
+      ParameterDirection:System.Data.ParameterDirection.Input/InputOutput/Output/ReturnValue分别为只读，读写，只写，返回4种类型 默认为只读
+      DefaultValue:可以设置默认值 默认没有
+      Size:可以设置参数长度 比如String的Size=32 默认为0
+      -->
+      <String name="@" Nullable="" ParameterDirection="" DefaultValue="" Size=""></String>
+    </Command>
+  </Ni>
+</Config>

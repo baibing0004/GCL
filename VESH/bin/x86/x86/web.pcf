@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <!--默认登陆页，否则为/login.aspx?return={0}-->
+    <add key="PublicClass.Project.VESH.E.Module.AModule.HttpSecurityModuleLoginURL" value="/login.aspx?return={0}"/>
+    <!--此属性用于定义需要Header内显示的公共资源控件地址 没有必须定义为空字符串-->
+    <add key="PublicClass.Project.VESH.V.View.APage.HeaderAscx" value="/V/View/Theme/{0}/Header.ascx"/>
+    <!--此属性用于定义需要Header内显示的公共资源控件地址 没有必须定义为空字符串-->
+    <add key="PublicClass.Project.VESH.V.View.AScriptPage.HeaderScriptAscx" value="/V/View/Theme/{0}/HeaderScript.ascx"/>
+    <!--此属性用于定义需要页面底部显示的公共资源控件地址 没有必须定义为空字符串-->
+    <add key="PublicClass.Project.VESH.V.View.AContentPage.MenuAscx" value="/V/View/Theme/{0}/Menu.ascx"/>
+    <!--此属性用于定义需要页面底部显示的公共资源控件地址 没有必须定义为空字符串-->
+    <add key="PublicClass.Project.VESH.V.View.AScriptPage.FooterScriptAscx" value="/V/View/Theme/{0}/Footer.ascx"/>
+    <!--此属性用于定义需要页面底部显示的公共资源控件地址 没有必须定义为空字符串-->
+    <add key="PublicClass.Project.VESH.V.View.APage.FooterAscx" value="/V/View/Theme/{0}/FooterScript.ascx"/>
+    <!--此属性用于定义permission.js路径-->
+    <add key="PublicClass.Project.VESH.E.Entity.Power.Permission.AS.ASPermissionAction.Permission" value="/Scripts/permission.js"/>
+  </AppSettings>
+  <Middler xmlns="http://tempuri.org/netmiddler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="VESH" dll="bin\VESH.dll" dll2="VESH, Version=1.0.0.0, Culture=neutral" method="constructor" mode="static" package="PublicClass.Project.VESH">
+      <!--HttpHandler需要-->
+      <!--获取各个Web实例.仍然需要复制，并说明其路径对应的默认域名解析-->
+      <objects name="PublicClass.Project.VESH.E.Module.AModule.Modules">
+        <object xmlns="" name="TestModule" ref="VESHs/VESHTest"/>
+      </objects>
+      <objects name="PublicClass.Project.VESH.V.Control.HttpHandler.IControlers">
+        <object xmlns="" name="" type=".V.Control.Controler.PageControler">
+          <String name="param" value="page"/>
+          <String name="extend" value="aspx"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.JsonControler">
+          <String name="param" value="json"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.JsonpControler">
+          <String name="param" value="jsonp"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.TJsonControler">
+          <String name="param" value="tjson"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.TJsonpControler">
+          <String name="param" value="tjsonp"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.XmlControler">
+          <String name="param" value="axml"/>
+        </object>
+        <object xmlns="" name="" type=".V.Control.Controler.PartControler">
+          <String name="param" value="part"/>
+          <String name="partUrl" value="/V/Control/Controler/part.aspx"/>
+        </object>
+      </objects>
+      <!--HttpModuler需要-->
+      <objects name="PublicClass.Project.VESH.V.Control.Module.HttpModuler.IModulers">
+        <object xmlns="" name="" type=".V.Control.Moduler.SessionModuler"></object>
+      </objects>
+      <!--AModule需要-->
+      <!--Logger一般的统一定义一个-->
+      <object name="PublicClass.Project.VESH.E.Module.AModule.Logger" dll="bin\PublicClass.dll" type="PublicClass.IO.Log.Logger"  method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type="PublicClass.IO.Log.LogRecord" method="constructor">
+          <Enum value="PublicClass.IO.Log.LogType.INFO"/>
+          <bool name="needDateTime"  value="true"/>
+          <bool name="needDiscript" value="true"/>
+          <bool name="needSeparator" value="false"/>
+        </object>
+        <object xmlns="" name="Listener" type="PublicClass.IO.Log.LoggerFactory.GetListener" method="factory">
+          <Enum value="PublicClass.IO.Log.LogType.DEBUG"/>
+          <object xmlns="" type="PublicClass.IO.Log.LoggerFactory.GetTextFileResource" method="factory">
+            <String value="F:\baibing\work\PublicClass\VESHTest\log\{0}.log"/>
+            <String value="gb2312"/>
+            <int value="1"/>
+            <int value="10000000"/>
+            <String value="0 0 * * * ?"/>
+            <String value="{0:yyyyMMddHH}"/>
+          </object>
+        </object>
+        <!--<object xmlns="" name="Listener" type="PublicClass.IO.Log.LoggerFactory.GetConsoleListener" method="factory">
+          <Enum value="PublicClass.IO.Log.LogType.TEST"/>
+          <Enum value="PublicClass.IO.Log.LogType.RELEASE"/>
+        </object>
+        <object xmlns="" name="Listener" type="PublicClass.IO.Log.LoggerFactory.GetWindowEventListener" method="factory">
+          <Enum value="PublicClass.IO.Log.LogType.TEST"/>
+          <String value=""/>
+          <String value="Logger"/>
+        </object>-->
+      </object>
+      <!--默认安全模式的例外路径正则，否则为/login.aspx-->
+      <object name="PublicClass.Project.VESH.E.Module.AModule.HttpSecurityModuleRegex" dll="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="System.Text.RegularExpressions.Regex">
+        <String xmlns="" value ="/login.aspx\S*"/>
+      </object>
+
+      <!--SessionDataManager需要-->
+      <object name="PublicClass.Project.VESH.V.Control.Session.SessionDataManager" type=".V.Control.Session.SessionDataManager" mode="instance">
+        <object xmlns="" ref="SessionDataAdapter"/>
+        <object xmlns="" ref="Security"/>
+        <object xmlns="" ref="MLanguage"/>
+      </object>
+      <!--SessionDataAdapter需要-->
+      <object name="SessionDataAdapter" type=".V.Control.Session.SessionDataAdapter" method="bean">
+        <!--这里设置默认的SessionData数据源，其实如果这里设置了，且SessionData都是Cookie存储的话，下面的设置可以不需要了。但这里为了说明用途所以加以说明-->
+        <object xmlns="" name="Resource" ref="CookieSessionResource"></object>
+        <!--这里用于调用SessionDataAdapter.SetResource设置Session名对应的Session源 譬如静态常量-->
+        <Params xmlns="" name="Resource">
+          <String name="name" value="version"/>
+          <object type=".V.Control.Session.Resource.ConstSessionResource" mode="static" method="constructor">
+            <String value="value=20130123"/>
+          </object>
+        </Params>
+        <Params xmlns="" name="Resource">
+          <String name="name" value=".Session.PIDS"/>
+          <object ref="SecuritySessionResourceDecorater"/>
+        </Params>
+      </object>
+      <!--设置Cookie存取方式-->
+      <object name="CookieSessionResource" type=".V.Control.Session.Resource.CookieSessionResource">
+        <bool xmlns="" name="isExceptIE6" value="true"/>
+        <String xmlns="" name="domain" value=""/>
+      </object>
+      <!--<object name="CookieSessionResource" type=".V.Control.Resource.MSSessionResource" />-->
+      <!--无缝加密-->
+      <object name="SecuritySessionResourceDecorater" type=".V.Control.Session.Resource.SecuritySessionResourceDecorater">
+        <object xmlns="" ref="CookieSessionResource" />
+        <object xmlns="" ref="DESXcrypt" />
+      </object>
+      <!--无缝加密-->
+      <object name="DESXcrypt" type=".V.Control.Session.Resource.DESXcrypt">
+        <String xmlns="" name="key" value="1lfBmAMvE1aS+yqdN4C4KvygWtL0jcgq"/>
+        <String xmlns="" name="iv" value="yltNVKv6WqU="/>
+      </object>
+
+      <!--登陆及其策略判断 -->
+      <object name="Security" type=".E.Entity.Power.Security.SecurityDecorater" method="constructor">
+        <objects xmlns="" convert=".E.Entity.Power.Security.SecurityDecorater.ToISecurity">
+          <object type=".E.Entity.Power.Security.DefaultSecurity"/>
+          <object type=".E.Entity.Power.Security.LoginTimeSecurity">
+            <int name="hours" value="24"/>
+          </object>
+        </objects>
+      </object>
+
+      <!--多语言包-->
+      <object name="MLanguage" type=".E.Entity.MLang.MLanguage" mode="instance">
+        <object xmlns="" ref="SessionDataAdapter"/>
+      </object>
+
+      <!--权限判断-->
+      <object name="PublicClass.Project.VESH.E.Entity.Power.Permission.IPermissionFactory" type=".E.Entity.Power.Permission.String.StringPerColFactory"></object>
+      <object name="PublicClass.Project.VESH.E.Entity.Power.Permission.IPermissionFactory2" type=".E.Entity.Power.Permission.AS.ASPerColFactory.cs">
+        <object xmlns="" ref="PublicClass.Project.VESH.V.Control.Session.SessionDataManager"></object>
+        <String xmlns="" name="template" value="template"/>
+        <String xmlns="" name="" value="PublicClass.Project.VESH.E.Entity.Power.Permission.AS.ASPermissionAction.Permission"/>
+      </object>
+
+      <!--NiParamFilter-->
+      <objects name="PublicClass.Project.VESH.V.Control.HttpHandler.IHttpNiParamFilters">
+        <object xmlns="" name="FormNiParamFilter" type=".V.Control.NiParamFilter.FormNiParamFiller"></object>
+        <object xmlns="" name="SessionDataNiParamFilter" type=".V.Control.NiParamFilter.SessionDataNiParamFilter">
+          <Array name="" type="String">
+            <String name="" value="version"/>
+          </Array>
+        </object>
+      </objects>
+
+    </app>
+    <app name="VESHs" method="constructor" mode="static" dll="bin/VESHTest.dll" package="VESHTest">
+      <object name="VESHTest"  type=".TestModule">
+        <String xmlns="" name="applicationPath" value=""/>
+        <String xmlns="" name="package" value="VESHTest"/>
+      </object>
+    </app>
+    <app name="Ni" method="constructor" mode="static" dll="bin\PublicClass.dll" package="PublicClass.Db.Ni">
+      <object name="sqlfactory" type=".SqlFactory"></object>
+      <object name="odbcfactory" type=".ODBCFactory"></object>
+      <object name="oledbfactory" type=".OleDbFactory"></object>
+      <object name="template" type=".NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="resource"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+        <!--<bool name="Transaction" value="True"/>-->
+      </object>
+      <object name="factory" type=".SqlFactory"></object>
+      <object name="ma" type="PublicClass.IO.Config.ConfigManagerFactory.GetConfigManagerFromDirectory" method="factory" >
+        <object xmlns="" type="PublicClass.IO.Config.ConfigManagerFactory.GetBassConfigManager" method="factory"/>
+        <String xmlns="" value=".\Ni\*.ni"/>
+      </object>
+      <object name="resource" type=".NiInstanceDataResource">
+        <object xmlns="" ref="sqlfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <String xmlns="" name="" value="Password=pass@word1;Persist Security Info=True;User ID=sa;Initial Catalog=SSIDB-DEV;Data Source=."/>
+        <!--<String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+      </object>
+      <object name="poolresource" type=".NiPoolDataResource">
+        <object xmlns="" ref="oledbfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <!--<String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+        <String xmlns="" value="Provider=SQLOLEDB.1;Password=pass@word1;Persist Security Info=True;User ID=sa;Initial Catalog=SSIDB-DEV;Data Source=."/>
+        <!--<object xmlns="" dll="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" method="constructor" mode="instance" type="System.Collection.ArrayList">
+          <Array xmlns="" name="connstrings" type="string">
+            <String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+          </Array>
+        </object>-->
+        <int xmlns="" value="2" />
+      </object>
+      <object name="parameters" type=".NiDataParameters"></object>
+    </app>
+  </Middler>
+</Config>

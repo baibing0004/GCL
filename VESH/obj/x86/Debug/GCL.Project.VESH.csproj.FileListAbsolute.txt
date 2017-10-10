@@ -1,0 +1,10 @@
+F:\baibing\work\GCL\VESH\bin\x86\Debug\base.pcf
+F:\baibing\work\GCL\VESH\bin\x86\Debug\web.pcf
+F:\baibing\work\GCL\VESH\bin\x86\Debug\VESH.dll
+F:\baibing\work\GCL\VESH\bin\x86\Debug\VESH.pdb
+F:\baibing\work\GCL\VESH\bin\x86\Debug\GCL.dll
+F:\baibing\work\GCL\VESH\bin\x86\Debug\System.Data.SQLite.dll
+F:\baibing\work\GCL\VESH\bin\x86\Debug\GCL.pdb
+F:\baibing\work\GCL\VESH\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\baibing\work\GCL\VESH\obj\x86\Debug\VESH.dll
+F:\baibing\work\GCL\VESH\obj\x86\Debug\VESH.pdb

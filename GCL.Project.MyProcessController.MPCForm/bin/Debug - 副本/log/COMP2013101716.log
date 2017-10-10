@@ -1,0 +1,263 @@
+2013-10-17 16:00:10:8 RELEASE 业务程序初始化!
+2013-10-17 16:00:10:9 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:00:10:9 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:05:19:0 RELEASE 业务程序初始化!
+2013-10-17 16:05:19:0 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:05:19:0 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:05:19:0 RELEASE 程序发生致命错误！终止运行错误描述注册出现错误
+GCL.Bean.Middler.MiddlerException: Dll:COMPServer.dll
+Type:COMPServer.PrcOtherMSMQPoolServer
+method:Constructor
+para1:	GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy
+para2:	ServiceStack.Redis.RedisClient
+para3:	System.String[]
+para4:	System.String[]
+para5:	FormatName:DIRECT=TCP:127.0.0.1\private$\compproc
+para6:	FormatName:DIRECT=TCP:127.0.0.1\private$\compproc
+para7:	500
+para8:	1
+para9:	500
+para10:	10
+para11:	500
+para12:	60000
+ ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.Exception: dd2
+   在 COMPServer.PrcOtherMSMQPoolServer..ctor(MSMQPoolServerStaregy formatterStaregy, RedisClient client, String[] sendPaths, String[] syncPaths, String msmqPath, String backMsmqPath, Int32 timeOut, Int32 createrNum, Int32 createrWaittime, Int32 customerNum, Int32 customerWaittime, Int32 refreshWaittime) 位置 F:\baibing\work\CMOP\CMOP\CMOPModules\COMPServer\PrcOtherMSMQPoolServer.cs:行号 38
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeMethodHandle._InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct& signature, RuntimeType declaringType)
+   在 System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 GCL.Bean.BeanTool.CreateInstance(String assemblyName, String typeName, Object[] paras) 位置 F:\baibing\work\GCL\GCL\Bean\BeanTool.cs:行号 915
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 19
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 26
+   在 GCL.Bean.Middler.AObjectContainer.CreateObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\AObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.StaticObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\StaticObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.Bean.Middler.ObjectCreaterParameter.GetValue(ConfigManager config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 141
+   在 GCL.Bean.Middler.CreaterParameters.GetParameters() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 38
+   在 GCL.Bean.Middler.ArrayObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ArrayObjectContainer.cs:行号 32
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.IO.Config.ConfigProxy.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigProxy.cs:行号 30
+   在 GCL.Bean.Middler.Middler.GetObjectsByAppName(String app, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\Middler.cs:行号 47
+   在 GCL.Project.MyProcessController.BClass.GetObjects(String key) 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 28
+   在 GCL.Project.MyProcessController.BClass.Init() 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 74
+2013-10-17 16:05:20:9 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:07:34:2 RELEASE 业务程序初始化!
+2013-10-17 16:07:34:2 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:07:34:2 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:07:34:3 RELEASE 程序发生致命错误！终止运行错误描述注册出现错误
+GCL.Bean.Middler.MiddlerException: Dll:COMPServer.dll
+Type:COMPServer.PrcOtherMSMQPoolServer
+method:Constructor
+para1:	GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy
+para2:	ServiceStack.Redis.RedisClient
+para3:	System.String[]
+para4:	System.String[]
+para5:	FormatName:DIRECT=TCP:127.0.0.1\private$\compproc
+para6:	FormatName:DIRECT=TCP:127.0.0.1\private$\compproc
+para7:	500
+para8:	1
+para9:	500
+para10:	10
+para11:	500
+para12:	60000
+ ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 COMPServer.PrcOtherMSMQPoolServer..ctor(MSMQPoolServerStaregy formatterStaregy, RedisClient client, String[] sendPaths, String[] syncPaths, String msmqPath, String backMsmqPath, Int32 timeOut, Int32 createrNum, Int32 createrWaittime, Int32 customerNum, Int32 customerWaittime, Int32 refreshWaittime) 位置 F:\baibing\work\CMOP\CMOP\CMOPModules\COMPServer\PrcOtherMSMQPoolServer.cs:行号 39
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeMethodHandle._InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct& signature, RuntimeType declaringType)
+   在 System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 GCL.Bean.BeanTool.CreateInstance(String assemblyName, String typeName, Object[] paras) 位置 F:\baibing\work\GCL\GCL\Bean\BeanTool.cs:行号 915
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 19
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 26
+   在 GCL.Bean.Middler.AObjectContainer.CreateObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\AObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.StaticObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\StaticObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.Bean.Middler.ObjectCreaterParameter.GetValue(ConfigManager config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 141
+   在 GCL.Bean.Middler.CreaterParameters.GetParameters() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 38
+   在 GCL.Bean.Middler.ArrayObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ArrayObjectContainer.cs:行号 32
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.IO.Config.ConfigProxy.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigProxy.cs:行号 30
+   在 GCL.Bean.Middler.Middler.GetObjectsByAppName(String app, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\Middler.cs:行号 47
+   在 GCL.Project.MyProcessController.BClass.GetObjects(String key) 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 28
+   在 GCL.Project.MyProcessController.BClass.Init() 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 74
+2013-10-17 16:07:35:2 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:09:06:1 RELEASE 业务程序初始化!
+2013-10-17 16:09:06:1 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:09:06:1 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:09:06:2 RELEASE 102事件,COMPSocketPoolServer业务服务注册
+2013-10-17 16:09:06:2 RELEASE 209事件,COMPSocketPoolServer服务初始化
+2013-10-17 16:09:06:2 RELEASE 210事件,COMPSocketPoolServer服务准备就绪
+2013-10-17 16:09:06:2 RELEASE 1101事件,获得绑定地址：127.0.0.1:7743
+2013-10-17 16:09:06:2 RELEASE 1101事件,收发超时时间:500毫秒
+2013-10-17 16:09:06:2 RELEASE 1101事件,接收缓存:8196KB
+2013-10-17 16:09:06:2 RELEASE 1101事件,监听器初始化成功!
+2013-10-17 16:09:06:2 RELEASE 102事件,ReceiveNormalPoolServer业务服务注册
+2013-10-17 16:09:06:2 RELEASE 209事件,ReceiveNormalPoolServer服务初始化
+2013-10-17 16:09:06:2 RELEASE 210事件,ReceiveNormalPoolServer服务准备就绪
+2013-10-17 16:09:06:2 RELEASE 102事件,SendMSMQPoolServer业务服务注册
+2013-10-17 16:09:06:2 RELEASE 209事件,SendMSMQPoolServer服务初始化
+2013-10-17 16:09:06:2 RELEASE 210事件,SendMSMQPoolServer服务准备就绪
+2013-10-17 16:09:06:2 RELEASE 102事件,PrcOtherMSMQPoolServer业务服务注册
+2013-10-17 16:09:06:2 RELEASE 209事件,PrcOtherMSMQPoolServer服务初始化
+2013-10-17 16:09:06:2 RELEASE 210事件,PrcOtherMSMQPoolServer服务准备就绪
+2013-10-17 16:09:06:2 RELEASE 101事件,业务服务注册成功!
+2013-10-17 16:09:06:2 RELEASE 101事件,获得执行命令行!c:\b.txt {0}
+2013-10-17 16:09:06:2 RELEASE 业务程序准备就绪！
+2013-10-17 16:09:06:2 RELEASE 103事件,刷新Settings列表
+2013-10-17 16:09:09:8 RELEASE 1103事件,监听器关闭！False
+2013-10-17 16:09:11:1 RELEASE 208事件,ReceiveNormalPoolServer服务撤销
+2013-10-17 16:09:11:1 RELEASE 208事件,COMPSocketPoolServer服务撤销
+2013-10-17 16:09:11:1 RELEASE 204事件,COMPSocketPoolServer服务终止
+2013-10-17 16:09:11:1 RELEASE 208事件,ReceiveNormalPoolServer服务撤销
+2013-10-17 16:09:11:1 RELEASE 208事件,SendMSMQPoolServer服务撤销
+2013-10-17 16:09:11:1 RELEASE 204事件,ReceiveNormalPoolServer服务终止
+2013-10-17 16:09:11:1 RELEASE 208事件,SendMSMQPoolServer服务撤销
+2013-10-17 16:09:11:2 RELEASE 204事件,SendMSMQPoolServer服务终止
+2013-10-17 16:09:16:2 RELEASE 208事件,PrcOtherMSMQPoolServer服务撤销
+2013-10-17 16:09:16:2 RELEASE 208事件,PrcOtherMSMQPoolServer服务撤销
+2013-10-17 16:09:16:2 RELEASE 204事件,PrcOtherMSMQPoolServer服务终止
+2013-10-17 16:09:16:2 RELEASE 业务程序停止！
+2013-10-17 16:09:16:2 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:09:27:4 RELEASE 业务程序初始化!
+2013-10-17 16:09:27:4 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:09:27:4 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:09:27:4 RELEASE 102事件,COMPSocketPoolServer业务服务注册
+2013-10-17 16:09:27:5 RELEASE 209事件,COMPSocketPoolServer服务初始化
+2013-10-17 16:09:27:5 RELEASE 210事件,COMPSocketPoolServer服务准备就绪
+2013-10-17 16:09:27:5 RELEASE 1101事件,获得绑定地址：127.0.0.1:7743
+2013-10-17 16:09:27:5 RELEASE 1101事件,收发超时时间:500毫秒
+2013-10-17 16:09:27:5 RELEASE 1101事件,接收缓存:8196KB
+2013-10-17 16:09:27:5 RELEASE 1101事件,监听器初始化成功!
+2013-10-17 16:09:27:5 RELEASE 102事件,ReceiveNormalPoolServer业务服务注册
+2013-10-17 16:09:27:5 RELEASE 209事件,ReceiveNormalPoolServer服务初始化
+2013-10-17 16:09:27:5 RELEASE 210事件,ReceiveNormalPoolServer服务准备就绪
+2013-10-17 16:09:27:5 RELEASE 102事件,SendMSMQPoolServer业务服务注册
+2013-10-17 16:09:27:5 RELEASE 209事件,SendMSMQPoolServer服务初始化
+2013-10-17 16:09:27:5 RELEASE 210事件,SendMSMQPoolServer服务准备就绪
+2013-10-17 16:09:27:5 RELEASE 102事件,PrcOtherMSMQPoolServer业务服务注册
+2013-10-17 16:09:27:5 RELEASE 209事件,PrcOtherMSMQPoolServer服务初始化
+2013-10-17 16:09:27:5 RELEASE 210事件,PrcOtherMSMQPoolServer服务准备就绪
+2013-10-17 16:09:27:5 RELEASE 102事件,SyncMSMQPoolServer业务服务注册
+2013-10-17 16:09:27:5 RELEASE 209事件,SyncMSMQPoolServer服务初始化
+2013-10-17 16:09:27:5 RELEASE 210事件,SyncMSMQPoolServer服务准备就绪
+2013-10-17 16:09:27:5 RELEASE 101事件,业务服务注册成功!
+2013-10-17 16:09:27:5 RELEASE 101事件,获得执行命令行!c:\b.txt {0}
+2013-10-17 16:09:27:5 RELEASE 业务程序准备就绪！
+2013-10-17 16:09:27:5 RELEASE 103事件,刷新Settings列表
+2013-10-17 16:09:29:3 RELEASE 1103事件,监听器关闭！False
+2013-10-17 16:09:32:4 RELEASE 208事件,COMPSocketPoolServer服务撤销
+2013-10-17 16:09:32:4 RELEASE 208事件,COMPSocketPoolServer服务撤销
+2013-10-17 16:09:32:4 RELEASE 208事件,ReceiveNormalPoolServer服务撤销
+2013-10-17 16:09:32:4 RELEASE 204事件,COMPSocketPoolServer服务终止
+2013-10-17 16:09:32:4 RELEASE 208事件,SendMSMQPoolServer服务撤销
+2013-10-17 16:09:32:4 RELEASE 204事件,ReceiveNormalPoolServer服务终止
+2013-10-17 16:09:32:4 RELEASE 204事件,SendMSMQPoolServer服务终止
+2013-10-17 16:09:37:5 RELEASE 208事件,PrcOtherMSMQPoolServer服务撤销
+2013-10-17 16:09:37:5 RELEASE 208事件,PrcOtherMSMQPoolServer服务撤销
+2013-10-17 16:09:37:5 RELEASE 204事件,PrcOtherMSMQPoolServer服务终止
+2013-10-17 16:09:37:5 RELEASE 204事件,SyncMSMQPoolServer服务终止
+2013-10-17 16:09:37:5 RELEASE 业务程序停止！
+2013-10-17 16:09:37:5 RELEASE 业务程序停止！
+2013-10-17 16:09:37:5 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:09:37:5 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:09:40:5 RELEASE 业务程序初始化!
+2013-10-17 16:09:40:5 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:09:40:5 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:09:40:6 RELEASE 程序发生致命错误！终止运行错误描述注册出现错误
+GCL.Bean.Middler.MiddlerException: Dll:COMPServer.dll
+Type:COMPServer.SyncPollPoolServer
+method:Constructor
+para1:	usp_COMP_GetSendCommands
+para2:	50
+para3:	GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy
+para4:	FormatName:DIRECT=TCP:127.0.0.1\private$\compsend
+para5:	500
+para6:	2
+para7:	500
+para8:	10
+para9:	500
+para10:	60000
+ ---> System.MissingMethodException: 未找到类型“COMPServer.SyncPollPoolServer”上的构造函数。
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 GCL.Bean.BeanTool.CreateInstance(String assemblyName, String typeName, Object[] paras) 位置 F:\baibing\work\GCL\GCL\Bean\BeanTool.cs:行号 915
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 19
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 GCL.Bean.Middler.ConstructorCreater.GetObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ConstructorCreater.cs:行号 26
+   在 GCL.Bean.Middler.AObjectContainer.CreateObject() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\AObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.StaticObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\StaticObjectContainer.cs:行号 20
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.Bean.Middler.ObjectCreaterParameter.GetValue(ConfigManager config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 141
+   在 GCL.Bean.Middler.CreaterParameters.GetParameters() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\CreaterParameters.cs:行号 38
+   在 GCL.Bean.Middler.ArrayObjectContainer.GetValue() 位置 F:\baibing\work\GCL\GCL\Bean\Middler\ArrayObjectContainer.cs:行号 32
+   在 GCL.Bean.Middler.MiddlerConfig.GetValueByName(String key, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 27
+   在 GCL.Bean.Middler.NameMiddlerGetParameter.GetValue(MiddlerConfig config) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerGetParameter.cs:行号 56
+   在 GCL.Bean.Middler.MiddlerConfig.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\MiddlerConfig.cs:行号 20
+   在 GCL.IO.Config.ConfigManager.GetConfigValue(String config, Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigManager.cs:行号 114
+   在 GCL.IO.Config.ConfigProxy.GetValue(Object key) 位置 F:\baibing\work\GCL\GCL\IO\Config\ConfigProxy.cs:行号 30
+   在 GCL.Bean.Middler.Middler.GetObjectsByAppName(String app, String name) 位置 F:\baibing\work\GCL\GCL\Bean\Middler\Middler.cs:行号 47
+   在 GCL.Project.MyProcessController.BClass.GetObjects(String key) 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 28
+   在 GCL.Project.MyProcessController.BClass.Init() 位置 F:\baibing\work\GCL\GCL.Project.MyProcessController\BClass.cs:行号 74
+2013-10-17 16:10:50:8 RELEASE 业务程序初始化!
+2013-10-17 16:10:50:8 RELEASE 101事件,MyProcessController启动!
+2013-10-17 16:10:50:8 RELEASE 101事件,成功获得日志等级:RELEASE
+2013-10-17 16:10:50:9 RELEASE 102事件,COMPSocketPoolServer业务服务注册
+2013-10-17 16:10:50:9 RELEASE 209事件,COMPSocketPoolServer服务初始化
+2013-10-17 16:10:50:9 RELEASE 210事件,COMPSocketPoolServer服务准备就绪
+2013-10-17 16:10:50:9 RELEASE 1101事件,获得绑定地址：127.0.0.1:7743
+2013-10-17 16:10:50:9 RELEASE 1101事件,收发超时时间:500毫秒
+2013-10-17 16:10:50:9 RELEASE 1101事件,接收缓存:8196KB
+2013-10-17 16:10:50:9 RELEASE 1101事件,监听器初始化成功!
+2013-10-17 16:10:50:9 RELEASE 102事件,ReceiveNormalPoolServer业务服务注册
+2013-10-17 16:10:50:9 RELEASE 209事件,ReceiveNormalPoolServer服务初始化
+2013-10-17 16:10:50:9 RELEASE 210事件,ReceiveNormalPoolServer服务准备就绪
+2013-10-17 16:10:50:9 RELEASE 102事件,SendMSMQPoolServer业务服务注册
+2013-10-17 16:10:50:9 RELEASE 209事件,SendMSMQPoolServer服务初始化
+2013-10-17 16:10:50:9 RELEASE 210事件,SendMSMQPoolServer服务准备就绪
+2013-10-17 16:10:50:9 RELEASE 102事件,PrcOtherMSMQPoolServer业务服务注册
+2013-10-17 16:10:50:9 RELEASE 209事件,PrcOtherMSMQPoolServer服务初始化
+2013-10-17 16:10:50:9 RELEASE 210事件,PrcOtherMSMQPoolServer服务准备就绪
+2013-10-17 16:10:50:9 RELEASE 102事件,SyncMSMQPoolServer业务服务注册
+2013-10-17 16:10:50:9 RELEASE 209事件,SyncMSMQPoolServer服务初始化
+2013-10-17 16:10:50:9 RELEASE 210事件,SyncMSMQPoolServer服务准备就绪
+2013-10-17 16:10:50:9 RELEASE 102事件,SyncPollPoolServer业务服务注册
+2013-10-17 16:10:51:0 RELEASE 209事件,SyncPollPoolServer服务初始化
+2013-10-17 16:10:51:0 RELEASE 210事件,SyncPollPoolServer服务准备就绪
+2013-10-17 16:10:51:0 RELEASE 101事件,业务服务注册成功!
+2013-10-17 16:10:51:0 RELEASE 101事件,获得执行命令行!c:\b.txt {0}
+2013-10-17 16:10:51:0 RELEASE 业务程序准备就绪！
+2013-10-17 16:10:51:0 RELEASE 103事件,刷新Settings列表
+2013-10-17 16:10:56:0 RELEASE 1103事件,监听器关闭！False
+2013-10-17 16:11:00:8 RELEASE 208事件,COMPSocketPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 208事件,COMPSocketPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 208事件,ReceiveNormalPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 208事件,SendMSMQPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 204事件,COMPSocketPoolServer服务终止
+2013-10-17 16:11:00:9 RELEASE 208事件,ReceiveNormalPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 208事件,SyncPollPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 204事件,ReceiveNormalPoolServer服务终止
+2013-10-17 16:11:00:9 RELEASE 业务程序停止！
+2013-10-17 16:11:00:9 RELEASE 204事件,SendMSMQPoolServer服务终止
+2013-10-17 16:11:00:9 RELEASE 208事件,PrcOtherMSMQPoolServer服务撤销
+2013-10-17 16:11:00:9 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:11:00:9 RELEASE 业务程序停止！
+2013-10-17 16:11:00:9 RELEASE 204事件,PrcOtherMSMQPoolServer服务终止
+2013-10-17 16:11:00:9 RELEASE 业务程序清除资源完成运行！
+2013-10-17 16:11:00:9 RELEASE 业务程序停止！
+2013-10-17 16:11:00:9 RELEASE 204事件,SyncMSMQPoolServer服务终止

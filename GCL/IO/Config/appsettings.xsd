@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="appsettings"
+    targetNamespace="http://tempuri.org/appsettings.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/appsettings.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="add">
+    <xs:complexType>
+      <xs:attribute name="key" type="xs:string" use="required"/>
+      <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AppSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="add" minOccurs="0" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

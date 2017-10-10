@@ -1,0 +1,10 @@
+G:\baibing\Work\PublicClass\PWGenerater\bin\Release\PWGenerater.exe
+G:\baibing\Work\PublicClass\PWGenerater\bin\Release\PWGenerater.pdb
+G:\baibing\Work\PublicClass\PWGenerater\bin\Release\PublicClass.dll
+G:\baibing\Work\PublicClass\PWGenerater\bin\Release\PublicClass.xml
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\ResolveAssemblyReference.cache
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\PWGenerater.FrmMain.resources
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\PWGenerater.Properties.Resources.resources
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\PWGenerater.csproj.GenerateResource.Cache
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\PWGenerater.exe
+G:\baibing\Work\PublicClass\PWGenerater\obj\Release\PWGenerater.pdb

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="middler"
+    targetNamespace="http://tempuri.org/middler.xsd"
+    elementFormDefault="unqualified"
+    attributeFormDefault="unqualified"
+    xmlns="http://tempuri.org/middler.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <!--定义常用属性和类型-->
+  <xs:simpleType name="mystring">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\S*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--各个节点经常用到的一些属性集合-->
+  <xs:attributeGroup name="defaultAttribute">
+    <!--必填，dll 物理地址，可以加上版本等等属性,请注意这里一定要写明.dll结尾-->
+    <!--例如：SampleAssembly.dll, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3-->
+    <xs:attribute name="dll" type="xs:string" use="optional"/>
+    <!--支持的对象生成方法，有构造函数方法:constructor、bean属性设置方法:bean、静态工厂生成方法:factory、先构造后bean属性设置方法:construtorbean、先工厂后bean属性设置方法:factorybean-->
+    <!--后2种方法都需要有construtorparalength属性设置其构造或者工厂方法的参数个数。-->
+    <xs:attribute name="method" default="bean" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="constructor"/>
+          <xs:enumeration value="bean"/>
+          <xs:enumeration value="factory"/>
+          <xs:enumeration value="constructorbean"/>
+          <xs:enumeration value="factorybean"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <!--支持的对象保存模式，有static静态单例模式，有instance新建对象模式，有pool对象池模式-->
+    <xs:attribute name="mode" default ="static" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="static"/>
+          <xs:enumeration value="instance"/>
+          <xs:enumeration value="pool"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <!--当mode为pool时设置对象池的最大容量，不填写默认为50-->
+    <xs:attribute name="size" default="50" type="xs:integer"/>
+    <!--当mode为pool时设置对象池中对象最大空闲过期时间，单位毫秒，不填默认为6万豪秒——1分钟-->
+    <xs:attribute name="wait" default="60000" type="xs:integer"/>
+    <!--当mode为pool时设置对象池获取对象超时时间，单位毫秒，不填默认为3万豪秒——半分钟-->
+    <xs:attribute name="timeout" default="30000" type="xs:integer"/>
+  </xs:attributeGroup>
+  <!--根节点，其含有多个app节点-->
+  <xs:element name="Middler">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="app"  minOccurs="1" maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <!--应用域节点-->
+  <!--
+      app的属性都为域中对象的属性默认值！
+      dll :dll所在位置（默认值）
+      method:域内创建新对象时的方法默认值 constructor/bean/factory/constructorbean/factorybean,不填默认为bean
+      bean/constructorbean/factorybean都要求参数设置name属性
+      constructorbean/factorybean都要求同时定义constructorparalength属性定义大于0的构造函数参数长度
+      mode:域内创建新对象时的模式默认值   static/instance/pool,不填默认为static
+      当mode为pool时，还可以定义了size属性（池大小 不填默认为50），wait属性（池中对象在不使用状态下有效期时间，单位毫秒，不填默认为6万豪秒——1分钟）,timeout属性（获取池中对象超时时间，单位毫秒，不填默认为3万豪秒——半分钟）
+      -->
+  <xs:group name="app_group">
+    <xs:choice>
+      <xs:element ref="object" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="objects" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="app">
+    <xs:complexType>
+      <xs:group ref="app_group" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:attribute  name="name" type="mystring" use="required"/>
+      <xs:attributeGroup ref="defaultAttribute"/>
+    </xs:complexType>
+  </xs:element>
+  <!--object节点类型-->
+  <!--常用值类型-->
+  <xs:complexType name="value_type">
+    <!--name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配-->
+    <xs:attribute  name="name" type="mystring" use="optional"/>
+    <!--当Value不存在时以节点值InnerText为Value-->
+      <xs:attribute name="value" type="mystring" use="optional"/>
+  </xs:complexType>
+  <!--常用值类型-->
+  <xs:group name="value_group">
+    <xs:choice>
+      <!--System.Convert.To支持的所有类型-->
+      <!--short/int/long/bool是Int16/Int32/Int64/Boolean的简化写法-->
+      <xs:element name="int" type="value_type"/>
+      <xs:element name="short" type="value_type"/>
+      <xs:element name="long" type="value_type"/>
+      <xs:element name="bool" type="value_type"/>
+      <xs:element name="Boolean" type="value_type"/>
+      <xs:element name="Byte" type="value_type"/>
+      <xs:element name="Char" type="value_type"/>
+      <xs:element name="DateTime" type="value_type"/>
+      <xs:element name="Decimal" type="value_type"/>
+      <xs:element name="Double" type="value_type"/>
+      <xs:element name="Int16" type="value_type"/>
+      <xs:element name="Int32" type="value_type"/>
+      <xs:element name="Int64" type="value_type"/>
+      <xs:element name="SByte" type="value_type"/>
+      <xs:element name="Single" type="value_type"/>
+      <xs:element name="String" type="value_type"/>
+      <xs:element name="UInt16" type="value_type"/>
+      <xs:element name="UInt32" type="value_type"/>
+      <xs:element name="UInt64" type="value_type"/>
+    </xs:choice>
+  </xs:group>
+  <!--对象类型-->
+  <xs:group name="object_group">
+    <xs:choice>
+      <!--常用值类型-->
+      <xs:group ref="value_group"/>
+      <!--
+        name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配
+        type:全路径类名或者全路径工厂方法
+        dll :dll所在位置 （如果不写采用App默认值）
+        method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+        mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      -->
+      <xs:element name="object">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="object_basetype">
+              <!--name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配-->
+              <xs:attribute  name="name" type="mystring" use="optional"/>
+              <!--ref:app/name,object专有属性，如果为/name或者name则认为是当前App,在有ref属性的情况下，除name外其他属性无效-->
+              <xs:attribute name="ref" type="mystring" use="optional"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+
+      <!--
+          对象组对象
+        name:对象组名
+        convert:如果需要返回的类型不是object[]而是类如Type[]这样的,那么需要设置dll定义的某个类的静态方法，可以将object[] 类型转换为对应类型数组类型。其具体实现可以参考Array.ConvertAll 如果不写默认不作任何转换，直接返回object[]。
+        以下部分定义objects内部object的默认值,如果不写那么默认使用App的默认值
+        dll :dll所在位置 （如果不写采用App默认值）
+        method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+        mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+        -->
+      <xs:element name="objects">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="objects_basetype">
+              <!--name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配-->
+              <xs:attribute  name="name" type="mystring" use="optional"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+
+      <!--
+        ref:key/name,ApplicationConfigConfig名加属性名 比如AppSettings/a，这里方法比较简单只提供Config键/键模式不提供更复杂的获取
+        -->
+      <xs:element name="Config">
+        <xs:complexType>
+          <xs:attribute  name="name" type="mystring" use="required"/>
+          <xs:attribute name="ref" type="mystring" use="required"/>
+        </xs:complexType>
+      </xs:element>
+
+      <!--
+        ref:key/name,ApplicationConfigConfig名加属性名 比如AppSettings/a，这里方法比较简单只提供Config键/键模式不提供更复杂的获取
+        -->
+      <xs:element name="MSConfig">
+        <xs:complexType>
+          <xs:attribute  name="name" type="mystring" use="required"/>
+          <xs:attribute name="ref" type="mystring" use="required"/>
+        </xs:complexType>
+      </xs:element>
+
+      <!--枚举类型，请注意一定要写明属性的全路径
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        dll :dll所在位置 （如果不写采用App默认值）
+        value:属性的全路径
+        -->
+      <xs:element name="Enum">
+        <xs:complexType>
+          <!--name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配-->
+          <xs:attribute  name="name" type="mystring" use="optional"/>
+          <!--必填，dll 物理地址，可以加上版本等等属性,请注意这里一定要写明.dll结尾-->
+          <!--例如：SampleAssembly.dll, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3-->
+          <xs:attribute  name="dll" type="xs:string" use="optional"/>
+          <!--当Value不存在时以节点值InnerText为Value-->
+            <xs:attribute name="value" type="mystring" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <!--值数组类型，请注意type属性是必须的而且对应System.Convert.To方法支持的所有类型，例如Int32，String等等-->
+      <xs:element name="Params">
+        <xs:complexType>
+          <xs:group ref="value_group" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:attribute  name="type" type="mystring" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <!--空值参数对象-->
+      <xs:element name="null">
+        <xs:complexType>
+          <xs:attribute  name="name" type="mystring" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:group>
+  <!--object参数类型-->
+  <xs:complexType name="object_basetype">
+    <xs:group ref="object_group" minOccurs="0" maxOccurs="unbounded"/>
+    <!--必填，类或者静态方法全路径名比如：System.Messaging.XmlMessageFormatter或者静态方法System.Text.Encoding.GetEncoding-->
+    <xs:attribute  name="type" type="mystring" use="optional"/>
+    <!--constructorbean/factorybean方法下,必填此属性设置其构造或者工厂方法的参数个数。-->
+    <xs:attribute  name="constructorparalength" type="xs:integer" use="optional"/>
+    <xs:attributeGroup ref="defaultAttribute"/>
+  </xs:complexType>
+  <!--最庞大的object节点
+      name:对象名
+      type:全路径类名或者全路径工厂方法
+      dll :dll所在位置 （如果不写采用App默认值）
+      method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+      mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      -->
+  <xs:element name="object">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="object_basetype">
+          <xs:attribute  name="name" type="mystring" use="required"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <!--objects节点类型-->
+  <xs:complexType name="objects_basetype">
+    <xs:choice>
+      <xs:element name="object" minOccurs="1" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="object_basetype">
+              <!--name:属性名(Mode为Bean/constructorbean/factorybean需要属性设置时必须有),其它情况严格按照参数顺序进行匹配-->
+              <xs:attribute  name="name" type="mystring" use="optional"/>
+              <!--ref:app/name,object专有属性，如果为/name或者name则认为是当前App,在有ref属性的情况下，除name外其他属性无效-->
+              <xs:attribute name="ref" type="mystring" use="optional"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="defaultAttribute"/>
+    <xs:attribute name="convert" type="mystring" use="optional"/>
+  </xs:complexType>
+  <!--app下的objects对象
+      objects的属性都为域中对象的属性默认值！不写则使用App默认值
+      name:对象组名
+      dll :dll所在位置 （如果不写采用App默认值）
+      method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+      mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      其属性为其内部的object属性对应属性默认值
+      -->
+  <xs:element name="objects">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="objects_basetype">
+          <xs:attribute  name="name" type="mystring" use="required"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

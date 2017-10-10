@@ -1,0 +1,12 @@
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\base.pcf
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\web.pcf
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\VESTTest2.dll
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\VESTTest2.pdb
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\VESH.dll
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\PublicClass.dll
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\VESH.pdb
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\PublicClass.pdb
+F:\baibing\work\PublicClass\VESH\VESTTest2\bin\PublicClass.xml
+F:\baibing\work\PublicClass\VESH\VESTTest2\obj\Debug\ResolveAssemblyReference.cache
+F:\baibing\work\PublicClass\VESH\VESTTest2\obj\Debug\VESTTest2.dll
+F:\baibing\work\PublicClass\VESH\VESTTest2\obj\Debug\VESTTest2.pdb

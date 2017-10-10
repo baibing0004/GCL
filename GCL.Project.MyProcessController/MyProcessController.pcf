@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <add key="MyProcessController.Command" value="c:\b.txt {0}"/>
+  </AppSettings>
+  <Middler xmlns="http://tempuri.org/netmiddler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="MyProcessController" dll="GCL.dll" method="constructor" mode="static" package="GCL.IO.Log">
+      <!--Logger-->
+      <object name="logger" type=".Logger" method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type=".LogRecord">
+          <Enum value=".LogType.INFO"/>
+          <bool name="needDateTime"  value="true"/>
+          <bool name="needDiscript" value="true"/>
+          <bool name="needSeparator" value="false"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetListener" method="factory">
+          <Enum value="GCL.IO.Log.LogType.RELEASE"/>
+          <Enum value="GCL.IO.Log.LogType.INFO"/>
+          <object xmlns="" type="GCL.IO.Log.LoggerFactory.GetTextFileResource" method="factory">
+            <String value="\log\{0}.log"/>
+            <String value="gb2312"/>
+            <int value="1"/>
+            <int value="10000000"/>
+            <String value="0 0 * * * ?"/>
+            <String value="{0:yyyyMMddHH}"/>
+          </object>
+        </object>
+        <!--<object xmlns="" name="Listener" type=".LoggerFactory.GetConsoleListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <Enum value=".LogType.TEST"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetWindowEventListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <String value=""/>
+          <String value="Logger"/>
+        </object>-->
+      </object>
+      <!--获取对象-->
+      <objects name="Servers">
+        <object xmlns="" ref="Servers/TestServer"/>
+      </objects>
+    </app>
+    <app name="Servers" dll="MyProcessController.dll" method="constructor" mode="static" >
+      <object name="TestServer" type="GCL.Project.MyProcessController.TestBusinessServer"  />
+      <object name="SendProcess" type=".SendProcess">
+        <object xmlns="" ref="MessageBuilderFactory"></object>
+        <!--消息队列设置-->
+        <object xmlns="" name="formatterStaregy" type="GCL.Project.MyProcessController.XMLMSMQPoolServerStaregy" dll="MyProcessController.dll">
+          <object name="type" dll="" type="System.Type.GetType" method="factory">
+            <String xmlns="" value="GCL.Project.ESB.Interface.SendMessage,GCL.Project.ESB.Interface"></String>
+          </object>
+        </object>
+        <String xmlns="" name="msmqPath" value="FormatName:DIRECT=TCP:192.168.1.100\private$\ESBUnSend"/>
+        <String xmlns="" name="backMsmqPath" value="FormatName:DIRECT=TCP:192.168.1.100\private$\ESBUnSend"/>
+        <int xmlns="" name="timeOut" value="500"/>
+        <int xmlns="" name="createrNum" value="1"/>
+        <int xmlns="" name="createrWaittime" value="500"/>
+        <int xmlns="" name="customerNum" value="20"/>
+        <int xmlns="" name="customerWaittime" value="500"/>
+        <int xmlns="" name="refreshWaittime" value="60000"/>
+      </object>
+    </app>
+  </Middler>
+</Config>

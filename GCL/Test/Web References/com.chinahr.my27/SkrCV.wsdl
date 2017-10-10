@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSkrCvCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sep" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSkrCvCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSkrCvCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewCV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CV_ID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewCVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ViewCVResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReferJob">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CurrIndustry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrJobCategory" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Experience" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="Degree" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResidenceState" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="JobID" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="JobCreateDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="EhrEmail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="type" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MemID" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="JobEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReferJobResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReferJobResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewXmlPathStrLang">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resumeid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="lang" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewXmlPathStrLangResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewXmlPathStrLangResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewXmlPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resumeid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lang" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewXmlPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewXmlPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXmlPathForEhr5">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXmlPathForEhr5Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetXmlPathForEhr5Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resumeId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lang" type="s:unsignedByte" />
+            <s:element minOccurs="1" maxOccurs="1" name="isText" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataXMLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReBuildXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resumeId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReBuildXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReBuildXMLResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateViewXmlByResumeId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resumeids" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="langs" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateViewXmlByResumeIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateViewXmlByResumeIdResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateViewXmlByResumeIdStrLang">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resumeids" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="langs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateViewXmlByResumeIdStrLangResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateViewXmlByResumeIdStrLangResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropStrViewXmlPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resumeids" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="langs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropStrViewXmlPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPropStrViewXmlPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="int" type="s:int" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSkrCvCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSkrCvCount" />
+  </wsdl:message>
+  <wsdl:message name="GetSkrCvCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSkrCvCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ViewCVSoapIn">
+    <wsdl:part name="parameters" element="tns:ViewCV" />
+  </wsdl:message>
+  <wsdl:message name="ViewCVSoapOut">
+    <wsdl:part name="parameters" element="tns:ViewCVResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReferJobSoapIn">
+    <wsdl:part name="parameters" element="tns:ReferJob" />
+  </wsdl:message>
+  <wsdl:message name="ReferJobSoapOut">
+    <wsdl:part name="parameters" element="tns:ReferJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathStrLangSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewXmlPathStrLang" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathStrLangSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewXmlPathStrLangResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewXmlPath" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewXmlPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetXmlPathForEhr5SoapIn">
+    <wsdl:part name="parameters" element="tns:GetXmlPathForEhr5" />
+  </wsdl:message>
+  <wsdl:message name="GetXmlPathForEhr5SoapOut">
+    <wsdl:part name="parameters" element="tns:GetXmlPathForEhr5Response" />
+  </wsdl:message>
+  <wsdl:message name="GetDataXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataXML" />
+  </wsdl:message>
+  <wsdl:message name="GetDataXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReBuildXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:ReBuildXML" />
+  </wsdl:message>
+  <wsdl:message name="ReBuildXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:ReBuildXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateViewXmlByResumeId" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateViewXmlByResumeIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdStrLangSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateViewXmlByResumeIdStrLang" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdStrLangSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateViewXmlByResumeIdStrLangResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPropStrViewXmlPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPropStrViewXmlPath" />
+  </wsdl:message>
+  <wsdl:message name="GetPropStrViewXmlPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPropStrViewXmlPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSkrCvCountHttpPostIn">
+    <wsdl:part name="UID" type="s:string" />
+    <wsdl:part name="Sep" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSkrCvCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ViewCVHttpPostIn">
+    <wsdl:part name="CV_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ViewCVHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReferJobHttpPostIn">
+    <wsdl:part name="CurrIndustry" type="s:string" />
+    <wsdl:part name="CurrJobCategory" type="s:string" />
+    <wsdl:part name="Experience" type="s:string" />
+    <wsdl:part name="Degree" type="s:string" />
+    <wsdl:part name="ResidenceState" type="s:string" />
+    <wsdl:part name="JobID" type="s:string" />
+    <wsdl:part name="JobCreateDate" type="s:string" />
+    <wsdl:part name="EhrEmail" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="MemID" type="s:string" />
+    <wsdl:part name="JobEndDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReferJobHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathStrLangHttpPostIn">
+    <wsdl:part name="resumeid" type="s:string" />
+    <wsdl:part name="lang" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathStrLangHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathHttpPostIn">
+    <wsdl:part name="resumeid" type="s:string" />
+    <wsdl:part name="lang" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetViewXmlPathHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetXmlPathForEhr5HttpPostIn">
+    <wsdl:part name="cvid" type="s:string" />
+    <wsdl:part name="ehrLang" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetXmlPathForEhr5HttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataXMLHttpPostIn">
+    <wsdl:part name="resumeId" type="s:string" />
+    <wsdl:part name="lang" type="s:string" />
+    <wsdl:part name="isText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataXMLHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ReBuildXMLHttpPostIn">
+    <wsdl:part name="resumeId" type="s:string" />
+    <wsdl:part name="lang" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReBuildXMLHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdHttpPostIn">
+    <wsdl:part name="resumeids" type="s1:StringArray" />
+    <wsdl:part name="langs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdStrLangHttpPostIn">
+    <wsdl:part name="resumeids" type="s1:StringArray" />
+    <wsdl:part name="langs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="UpdateViewXmlByResumeIdStrLangHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetPropStrViewXmlPathHttpPostIn">
+    <wsdl:part name="resumeids" type="s1:StringArray" />
+    <wsdl:part name="langs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="GetPropStrViewXmlPathHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="SkrCVSoap">
+    <wsdl:operation name="GetSkrCvCount">
+      <wsdl:input message="tns:GetSkrCvCountSoapIn" />
+      <wsdl:output message="tns:GetSkrCvCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewCV">
+      <wsdl:input message="tns:ViewCVSoapIn" />
+      <wsdl:output message="tns:ViewCVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReferJob">
+      <wsdl:input message="tns:ReferJobSoapIn" />
+      <wsdl:output message="tns:ReferJobSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPathStrLang">
+      <wsdl:input message="tns:GetViewXmlPathStrLangSoapIn" />
+      <wsdl:output message="tns:GetViewXmlPathStrLangSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPath">
+      <wsdl:input message="tns:GetViewXmlPathSoapIn" />
+      <wsdl:output message="tns:GetViewXmlPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlPathForEhr5">
+      <wsdl:input message="tns:GetXmlPathForEhr5SoapIn" />
+      <wsdl:output message="tns:GetXmlPathForEhr5SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataXML">
+      <wsdl:input message="tns:GetDataXMLSoapIn" />
+      <wsdl:output message="tns:GetDataXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReBuildXML">
+      <wsdl:input message="tns:ReBuildXMLSoapIn" />
+      <wsdl:output message="tns:ReBuildXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeId">
+      <wsdl:input message="tns:UpdateViewXmlByResumeIdSoapIn" />
+      <wsdl:output message="tns:UpdateViewXmlByResumeIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeIdStrLang">
+      <wsdl:input message="tns:UpdateViewXmlByResumeIdStrLangSoapIn" />
+      <wsdl:output message="tns:UpdateViewXmlByResumeIdStrLangSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPropStrViewXmlPath">
+      <wsdl:input message="tns:GetPropStrViewXmlPathSoapIn" />
+      <wsdl:output message="tns:GetPropStrViewXmlPathSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SkrCVHttpPost">
+    <wsdl:operation name="GetSkrCvCount">
+      <wsdl:input message="tns:GetSkrCvCountHttpPostIn" />
+      <wsdl:output message="tns:GetSkrCvCountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewCV">
+      <wsdl:input message="tns:ViewCVHttpPostIn" />
+      <wsdl:output message="tns:ViewCVHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReferJob">
+      <wsdl:input message="tns:ReferJobHttpPostIn" />
+      <wsdl:output message="tns:ReferJobHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPathStrLang">
+      <wsdl:input message="tns:GetViewXmlPathStrLangHttpPostIn" />
+      <wsdl:output message="tns:GetViewXmlPathStrLangHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPath">
+      <wsdl:input message="tns:GetViewXmlPathHttpPostIn" />
+      <wsdl:output message="tns:GetViewXmlPathHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlPathForEhr5">
+      <wsdl:input message="tns:GetXmlPathForEhr5HttpPostIn" />
+      <wsdl:output message="tns:GetXmlPathForEhr5HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataXML">
+      <wsdl:input message="tns:GetDataXMLHttpPostIn" />
+      <wsdl:output message="tns:GetDataXMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReBuildXML">
+      <wsdl:input message="tns:ReBuildXMLHttpPostIn" />
+      <wsdl:output message="tns:ReBuildXMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeId">
+      <wsdl:input message="tns:UpdateViewXmlByResumeIdHttpPostIn" />
+      <wsdl:output message="tns:UpdateViewXmlByResumeIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeIdStrLang">
+      <wsdl:input message="tns:UpdateViewXmlByResumeIdStrLangHttpPostIn" />
+      <wsdl:output message="tns:UpdateViewXmlByResumeIdStrLangHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPropStrViewXmlPath">
+      <wsdl:input message="tns:GetPropStrViewXmlPathHttpPostIn" />
+      <wsdl:output message="tns:GetPropStrViewXmlPathHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SkrCVSoap" type="tns:SkrCVSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSkrCvCount">
+      <soap:operation soapAction="http://tempuri.org/GetSkrCvCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewCV">
+      <soap:operation soapAction="http://tempuri.org/ViewCV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReferJob">
+      <soap:operation soapAction="http://tempuri.org/ReferJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPathStrLang">
+      <soap:operation soapAction="http://tempuri.org/GetViewXmlPathStrLang" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPath">
+      <soap:operation soapAction="http://tempuri.org/GetViewXmlPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlPathForEhr5">
+      <soap:operation soapAction="http://tempuri.org/GetXmlPathForEhr5" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataXML">
+      <soap:operation soapAction="http://tempuri.org/GetDataXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReBuildXML">
+      <soap:operation soapAction="http://tempuri.org/ReBuildXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeId">
+      <soap:operation soapAction="http://tempuri.org/UpdateViewXmlByResumeId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeIdStrLang">
+      <soap:operation soapAction="http://tempuri.org/UpdateViewXmlByResumeIdStrLang" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPropStrViewXmlPath">
+      <soap:operation soapAction="http://tempuri.org/GetPropStrViewXmlPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SkrCVSoap12" type="tns:SkrCVSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSkrCvCount">
+      <soap12:operation soapAction="http://tempuri.org/GetSkrCvCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewCV">
+      <soap12:operation soapAction="http://tempuri.org/ViewCV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReferJob">
+      <soap12:operation soapAction="http://tempuri.org/ReferJob" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPathStrLang">
+      <soap12:operation soapAction="http://tempuri.org/GetViewXmlPathStrLang" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPath">
+      <soap12:operation soapAction="http://tempuri.org/GetViewXmlPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlPathForEhr5">
+      <soap12:operation soapAction="http://tempuri.org/GetXmlPathForEhr5" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataXML">
+      <soap12:operation soapAction="http://tempuri.org/GetDataXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReBuildXML">
+      <soap12:operation soapAction="http://tempuri.org/ReBuildXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeId">
+      <soap12:operation soapAction="http://tempuri.org/UpdateViewXmlByResumeId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeIdStrLang">
+      <soap12:operation soapAction="http://tempuri.org/UpdateViewXmlByResumeIdStrLang" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPropStrViewXmlPath">
+      <soap12:operation soapAction="http://tempuri.org/GetPropStrViewXmlPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SkrCVHttpPost" type="tns:SkrCVHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetSkrCvCount">
+      <http:operation location="/GetSkrCvCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewCV">
+      <http:operation location="/ViewCV" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReferJob">
+      <http:operation location="/ReferJob" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPathStrLang">
+      <http:operation location="/GetViewXmlPathStrLang" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewXmlPath">
+      <http:operation location="/GetViewXmlPath" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlPathForEhr5">
+      <http:operation location="/GetXmlPathForEhr5" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataXML">
+      <http:operation location="/GetDataXML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReBuildXML">
+      <http:operation location="/ReBuildXML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeId">
+      <http:operation location="/UpdateViewXmlByResumeId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViewXmlByResumeIdStrLang">
+      <http:operation location="/UpdateViewXmlByResumeIdStrLang" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPropStrViewXmlPath">
+      <http:operation location="/GetPropStrViewXmlPath" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SkrCV">
+    <wsdl:port name="SkrCVSoap" binding="tns:SkrCVSoap">
+      <soap:address location="http://my.chinahr.com/chrws/SkrCV.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SkrCVSoap12" binding="tns:SkrCVSoap12">
+      <soap12:address location="http://my.chinahr.com/chrws/SkrCV.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SkrCVHttpPost" binding="tns:SkrCVHttpPost">
+      <http:address location="http://my.chinahr.com/chrws/SkrCV.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

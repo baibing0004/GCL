@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sms.chinahr.com" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://sms.chinahr.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sms.chinahr.com">
+      <s:element name="MessageAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MessageList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceIP" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rank" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SendType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsOver" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sms_Time" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Send_Time" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MessageAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessageAddResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="myMessageAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MessageList" />
+            <s:element minOccurs="1" maxOccurs="1" name="isTodayCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="myMessageAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="myMessageAddResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MessageAddSoapIn">
+    <wsdl:part name="parameters" element="tns:MessageAdd" />
+  </wsdl:message>
+  <wsdl:message name="MessageAddSoapOut">
+    <wsdl:part name="parameters" element="tns:MessageAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="myMessageAddSoapIn">
+    <wsdl:part name="parameters" element="tns:myMessageAdd" />
+  </wsdl:message>
+  <wsdl:message name="myMessageAddSoapOut">
+    <wsdl:part name="parameters" element="tns:myMessageAddResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessageServiceSoap">
+    <wsdl:operation name="MessageAdd">
+      <wsdl:input message="tns:MessageAddSoapIn" />
+      <wsdl:output message="tns:MessageAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="myMessageAdd">
+      <wsdl:input message="tns:myMessageAddSoapIn" />
+      <wsdl:output message="tns:myMessageAddSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageServiceSoap" type="tns:MessageServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MessageAdd">
+      <soap:operation soapAction="http://sms.chinahr.com/MessageAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="myMessageAdd">
+      <soap:operation soapAction="http://sms.chinahr.com/myMessageAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageServiceSoap12" type="tns:MessageServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MessageAdd">
+      <soap12:operation soapAction="http://sms.chinahr.com/MessageAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="myMessageAdd">
+      <soap12:operation soapAction="http://sms.chinahr.com/myMessageAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageService">
+    <wsdl:port name="MessageServiceSoap" binding="tns:MessageServiceSoap">
+      <soap:address location="http://smscc.chinahr.com/messageservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageServiceSoap12" binding="tns:MessageServiceSoap12">
+      <soap12:address location="http://smscc.chinahr.com/messageservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

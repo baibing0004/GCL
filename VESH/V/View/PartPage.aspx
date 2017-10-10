@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PartPage.aspx.cs" Inherits="PublicClass.Project.VESH.V.View.PartPage" %>

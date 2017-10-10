@@ -1,0 +1,9 @@
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\MyProcessController.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\MyProcessController.pdb
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\MyProcessController.XML
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\GCL.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\System.Data.SQLite.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController\bin\x86\Debug\GCL.pdb
+F:\baibing\work\GCL\GCL.Project.MyProcessController\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\baibing\work\GCL\GCL.Project.MyProcessController\obj\x86\Debug\MyProcessController.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController\obj\x86\Debug\MyProcessController.pdb

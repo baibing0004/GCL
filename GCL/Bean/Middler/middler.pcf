@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Middler>
+    <!--应用域-->
+    <!--
+      app状态下的属性都为域中对象的属性默认值！
+      dll :dll所在位置（默认值）
+      dll可以写成：G:/baibing/Work/GCL/Test/bin/Debug/System.Messaging.dll, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(空格不敏感)
+      程序自动分成G:/baibing/Work/GCL/Test/bin/Debug/System.Messaging.dll与System.Messaging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+      所以dll也可以写成G:/baibing/Work/GCL/Test/bin/Debug/System.Messaging.dll或者System.Messaging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(空格不敏感)
+      前者读取私有dll后者读取共享dll,
+      针对Factory dll也可以定义 "|G:/baibing/Work/GCL/Test/bin/Debug/System.Messaging.dll, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" 区别在于GetType方式使用时dll中|号之后的不是GetType的自己类，而是调用的dll的自己类
+      method:域内创建新对象时的方法默认值 constructor/bean/factory/constructorbean/factorybean,不填默认为bean
+      bean/constructorbean/factorybean都要求参数设置name属性
+      constructorbean/factorybean都要求同时定义constructorparalength属性定义大于0的构造函数参数长度
+      mode:域内创建新对象时的模式默认值   static/instance/pool,不填默认为static
+      当mode为pool时，还可以定义了size属性（池大小 不填默认为50），wait属性（池中对象在不使用状态下有效期时间，单位毫秒，不填默认为6万豪秒——1分钟）,timeout属性（获取池中对象超时时间，单位毫秒，不填默认为3万豪秒——半分钟）
+      package:type属性中默认的包名，当type/convert/Enum元素的value属性值以"."开头时，解析器会自动以package中的值加在type属性值的前面构成绝对路径
+      -->
+    <app name="" dll="" method="" mode="" package="">
+      <!--
+      name:对象名
+      type:全路径类名或者全路径工厂方法
+      dll :dll所在位置 （如果不写采用App默认值）
+      method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+      mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      -->
+      <object name="" type="" dll="" method="" mode="">
+        <!--
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        type:全路径类名或者全路径工厂方法
+        dll :dll所在位置 （如果不写采用App默认值）
+        method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+        mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      -->
+        <object name="" type="" dll="" method="" mode=""/>
+        <!--
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        ref:app/name,如果为/name或者name则认为是当前App
+        -->
+        <object name="" ref="" />
+        <!--
+        name:对象组名
+        convert:如果需要返回的类型不是object[]而是类如Type[]这样的,那么需要设置dll定义的某个类的静态方法，可以将object[] 类型转换为对应类型数组类型。其具体实现可以参考Array.ConvertAll 如果不写默认不作任何转换，直接返回object[]。
+        以下部分定义objects内部object的默认值,如果不写那么默认使用App的默认值,以"."开头时，解析器会自动以package中的值加在type属性值的前面构成绝对路径
+        dll :dll所在位置 （如果不写采用App默认值）
+        method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+        mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+        package:type属性中默认的包名，当type/convert/Enum元素的value属性值以"."开头时，解析器会自动以package中的值加在type属性值的前面构成绝对路径
+        -->
+        <objects name="" dll="" method="" mode="" convert="" package="">
+          <object name="" type="" dll="" method="" mode="">
+            <!--object可以使用的参数等-->
+          </object>
+        </objects>
+        <!--
+        请注意这里的objects参数对象一般只能对应参数为object[]的方法，如果对应参数为类如 Type[]的方法，请使用objects而且声明convert静态方法的全路径。
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        ref:app/name,如果为/name则认为是当前App
+        -->
+        <objects name="" ref="" />
+        <!--
+        int:System.Convert可以识别的所有类型 long,string,bool等等
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        value:参数值（特别的枚举类型请使用对应的int类型）
+        -->
+        <int name="" value=""/>
+        <!--
+        ref:key/name,ApplicationConfigConfig名加属性名 比如AppSettings/a，这里方法比较简单只提供Config键/键模式不提供更复杂的获取
+        -->
+        <config name="" ref=""/>
+        <!--
+        ref:key/name,微软Config名加属性名 比如AppSettings/a，这里方法比较简单只提供Config键/键模式不提供更复杂的获取
+        -->
+        <msconfig name="" ref=""/>
+        <!--枚举类型，请注意一定要写明属性的全路径
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        dll :dll所在位置 （如果不写采用App默认值）
+        value:属性的全路径,以"."开头时，解析器会自动以package中的值加在type属性值的前面构成绝对路径
+        -->
+        <Enum name="" dll="" value="GCL.IO.Log.LogType.INFO"/>
+        <!--值数组类型，请注意type属性是必须的而且对应System.Convert.To方法支持的所有类型，例如Int32，String等等-->
+        <Array type="String">
+          <!--只能是Convert.To方法支持的所有值类型,而且类型相同！请注意这里的String类型必不可少！-->
+          <String name="" value=""/>
+        </Array>
+        <!--用于在Bean状态下进行某个属性的多参数设置比如SetP(a,b)-->
+        <Params name="">
+          <String value=""/>
+          <object/>
+        </Params>
+        <!--空值参数对象-->
+        <null name="" />
+      </object>
+      <!--
+      name:对象组名
+      dll :dll所在位置 （如果不写采用App默认值）
+      method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用App默认值）
+      mode:创建新对象时的模式   static/instance/pool（如果不写采用App默认值）
+      package:type属性中默认的包名，当type属性值以"."开头时，解析器会自动以package中的值加在type属性值的前面构成绝对路径
+      -->
+      <objects name="" dll="" method="" mode="" package="">
+        <!--
+        name:属性名(Mode为Bean时必须有),否则会严格按照参数顺序进行匹配
+        type:全路径类名或者全路径工厂方法
+        dll :dll所在位置 （如果不写采用objects默认值）
+        method:创建新对象时的方法 constructor/bean/factory/constructorbean/factorybean（如果不写采用objects默认值）
+        mode:创建新对象时的模式   static/instance/pool（如果不写采用objects默认值）
+      -->
+        <object name="" type="" dll="" method="" mode="">
+          <!--object可以使用的参数等-->
+        </object>
+      </objects>
+    </app>
+  </Middler>
+</Config>

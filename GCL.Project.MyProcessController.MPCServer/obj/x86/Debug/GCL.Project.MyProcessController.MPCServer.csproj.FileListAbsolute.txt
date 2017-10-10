@@ -1,0 +1,17 @@
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MPCServer.exe.config
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MPCServer.exe
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MPCServer.pdb
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\GCL.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MyProcessController.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\System.Data.SQLite.dll
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MyProcessController.pdb
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\MyProcessController.xml
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\bin\x86\Debug\GCL.pdb
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\GCL.Project.MyProcessController.MPCServer.ProjectInstaller.resources
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\ResGen.read.1.tlog
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\ResGen.write.1.tlog
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\MPCServer.exe
+F:\baibing\work\GCL\GCL.Project.MyProcessController.MPCServer\obj\x86\Debug\MPCServer.pdb

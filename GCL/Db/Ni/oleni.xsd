@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="oleni" targetNamespace="http://tempuri.org/oleni.xsd" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://tempuri.org/oleni.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!--定义常用属性和类型-->
+	<xs:simpleType name="mystring">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\S*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<!--
+      标签默认为可以解析的参数类型,默认情况下先寻找System.Data.DbType枚举中的属性，然后再根据其具体数据库类型，进行类型转换。这里大小写不敏感
+      name:参数名 请记住需要添加@，如果不添加，那么系统自动添加
+      Nullable:true/false 是否允许为空，默认不允许
+      ParameterDirection:System.Data.ParameterDirection.Input/InputOutput/Output/ReturnValue分别为只读，读写，只写，返回4种类型 默认为只读
+      DefaultValue:可以设置默认值 默认没有
+      Size:可以设置参数长度 比如String的Size=32 默认为0
+      -->
+	<xs:complexType name="ParameterType">
+		<xs:attribute name="name" type="mystring" use="required" />
+		<xs:attribute name="Nullable" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="ParameterDirection" use="optional" default="Input">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Input" />
+					<xs:enumeration value="InputOutput" />
+					<xs:enumeration value="Output" />
+					<xs:enumeration value="ReturnValue" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="DefaultValue" type="xs:string" />
+		<xs:attribute name="Size" type="xs:integer" />
+	</xs:complexType>
+	<!--基本类型 DBType定义的-->
+	<xs:group name="Parameter_DBType">
+		<xs:choice>
+			<xs:element name="AnsiString" type="ParameterType" />
+			<xs:element name="AnsiStringFixedLength" type="ParameterType" />
+			<xs:element name="Binary" type="ParameterType" />
+			<xs:element name="Boolean" type="ParameterType" />
+			<xs:element name="Byte" type="ParameterType" />
+			<xs:element name="Currency" type="ParameterType" />
+			<xs:element name="Date" type="ParameterType" />
+			<xs:element name="DateTime" type="ParameterType" />
+			<xs:element name="Decimal" type="ParameterType" />
+			<xs:element name="Double" type="ParameterType" />
+			<xs:element name="Guid" type="ParameterType" />
+			<xs:element name="Int16" type="ParameterType" />
+			<xs:element name="Int32" type="ParameterType" />
+			<xs:element name="Int64" type="ParameterType" />
+			<xs:element name="Object" type="ParameterType" />
+			<xs:element name="SByte" type="ParameterType" />
+			<xs:element name="Single" type="ParameterType" />
+			<xs:element name="String" type="ParameterType" />
+			<xs:element name="StringFixedLength" type="ParameterType" />
+			<xs:element name="Time" type="ParameterType" />
+			<xs:element name="UInt16" type="ParameterType" />
+			<xs:element name="UInt32" type="ParameterType" />
+			<xs:element name="UInt64" type="ParameterType" />
+			<xs:element name="VarNumeric" type="ParameterType" />
+			<xs:element name="Xml" type="ParameterType" />
+      <xs:element name="Param" type="ParameterType"/>
+		</xs:choice>
+	</xs:group>
+	<!--SQL类型 OLEDBType定义的-->
+	<xs:group name="Parameter_OLEDBType">
+		<xs:choice>
+			<xs:group ref="Parameter_DBType" />
+			<xs:element name="BigInt" type="ParameterType" />
+			<xs:element name="BSTR" type="ParameterType" />
+			<xs:element name="Char" type="ParameterType" />
+			<xs:element name="DBDate" type="ParameterType" />
+			<xs:element name="DBTime" type="ParameterType" />
+			<xs:element name="DBTimeStamp" type="ParameterType" />
+			<xs:element name="Empty" type="ParameterType" />
+			<xs:element name="Error" type="ParameterType" />
+			<xs:element name="Filetime" type="ParameterType" />
+			<xs:element name="IDispatch" type="ParameterType" />
+			<xs:element name="Integer" type="ParameterType" />
+			<xs:element name="IUnknown" type="ParameterType" />
+			<xs:element name="LongVarBinary" type="ParameterType" />
+			<xs:element name="LongVarChar" type="ParameterType" />
+			<xs:element name="LongVarWChar" type="ParameterType" />
+			<xs:element name="Numeric" type="ParameterType" />
+			<xs:element name="PropVariant" type="ParameterType" />
+			<xs:element name="SmallInt" type="ParameterType" />
+			<xs:element name="TinyInt" type="ParameterType" />
+			<xs:element name="UnsignedBigInt" type="ParameterType" />
+			<xs:element name="UnsignedInt" type="ParameterType" />
+			<xs:element name="UnsignedSmallInt" type="ParameterType" />
+			<xs:element name="UnsignedTinyInt" type="ParameterType" />
+			<xs:element name="VarBinary" type="ParameterType" />
+			<xs:element name="VarChar" type="ParameterType" />
+			<xs:element name="Variant" type="ParameterType" />
+			<xs:element name="VarWChar" type="ParameterType" />
+			<xs:element name="WChar" type="ParameterType" />
+		</xs:choice>
+	</xs:group>
+	<xs:element name="Command">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Content" type="xs:string" minOccurs="1" maxOccurs="1" />
+				<xs:group ref="Parameter_OLEDBType" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+			<!--
+    name:命令名
+    type:CommandType枚举值：StoredProcedure,TableDirect,Text 不填写默认值为StoredProcedure
+    -->
+			<xs:attribute name="name" type="mystring" use="required" />
+			<xs:attribute name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="StoredProcedure" />
+						<xs:enumeration value="Text" />
+						<xs:enumeration value="TableDirect" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Ni">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Command" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

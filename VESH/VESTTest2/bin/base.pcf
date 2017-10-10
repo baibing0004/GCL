@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <ConfigConverts xmlns="http://tempuri.org/config.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+    <ConfigConvert name="ConfigConverts" type="PublicClass.IO.Config.ConfigConvert" dll="" />
+    <ConfigConvert name="AppSettings" type="PublicClass.IO.Config.AppSettingsConfigConvert" dll="" />
+    <ConfigConvert name="ConnectionStrings" type="PublicClass.IO.Config.ConnectionStringsConvert" dll="" />
+    <ConfigConvert name="Middler" type="PublicClass.Bean.Middler.NetMiddlerConfigConvert" dll="" />
+    <ConfigConvert name="Ni" type="PublicClass.Db.Ni.NiConfigConvert" dll="" />
+  </ConfigConverts>
+</Config>

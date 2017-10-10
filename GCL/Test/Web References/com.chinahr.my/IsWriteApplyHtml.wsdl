@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="IsReBuild">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReBuildResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetFilePath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetFilePathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReBuildAndGetFilePathResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFilePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetHRDBPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetHRDBPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReBuildAndGetHRDBPathResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFilePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetFileOldPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReBuildAndGetFileOldPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReBuildAndGetFileOldPathResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFilePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCVHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cvid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="ehrLang" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCVHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCVHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsReBuildSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReBuild" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReBuildResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetFilePathSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetFilePath" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetFilePathSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetFilePathResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetHRDBPathSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetHRDBPath" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetHRDBPathSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetHRDBPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetFileOldPathSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetFileOldPath" />
+  </wsdl:message>
+  <wsdl:message name="IsReBuildAndGetFileOldPathSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReBuildAndGetFileOldPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCVHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCVHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetCVHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCVHtmlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IsWriteApplyHtmlSoap">
+    <wsdl:operation name="IsReBuild">
+      <wsdl:input message="tns:IsReBuildSoapIn" />
+      <wsdl:output message="tns:IsReBuildSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetFilePath">
+      <wsdl:input message="tns:IsReBuildAndGetFilePathSoapIn" />
+      <wsdl:output message="tns:IsReBuildAndGetFilePathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetHRDBPath">
+      <wsdl:input message="tns:IsReBuildAndGetHRDBPathSoapIn" />
+      <wsdl:output message="tns:IsReBuildAndGetHRDBPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetFileOldPath">
+      <wsdl:input message="tns:IsReBuildAndGetFileOldPathSoapIn" />
+      <wsdl:output message="tns:IsReBuildAndGetFileOldPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCVHtml">
+      <wsdl:input message="tns:GetCVHtmlSoapIn" />
+      <wsdl:output message="tns:GetCVHtmlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IsWriteApplyHtmlSoap" type="tns:IsWriteApplyHtmlSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsReBuild">
+      <soap:operation soapAction="http://tempuri.org/IsReBuild" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetFilePath">
+      <soap:operation soapAction="http://tempuri.org/IsReBuildAndGetFilePath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetHRDBPath">
+      <soap:operation soapAction="http://tempuri.org/IsReBuildAndGetHRDBPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReBuildAndGetFileOldPath">
+      <soap:operation soapAction="http://tempuri.org/IsReBuildAndGetFileOldPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCVHtml">
+      <soap:operation soapAction="http://tempuri.org/GetCVHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IsWriteApplyHtml">
+    <wsdl:port name="IsWriteApplyHtmlSoap" binding="tns:IsWriteApplyHtmlSoap">
+      <soap:address location="http://my.chinahr.com/ChrWS/IsWriteApplyHtml.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <add key="TestPoolBusinessServer.Customers" value="300" />
+    <add key="TestPoolBusinessServer.CreaterWaitTime" value="1000" />
+    <add key="TestPoolBusinessServer.CustomerWaitTime" value="50" />
+    <add key="SendErrorEmailByMode" value="2" />
+  </AppSettings>
+  <AppSettings>
+    <add key="SendErrorEmailByMode" value="4" />
+    <add key="TestPoolBusinessServer.RefreshWaitTime" value="10000" />
+    <add key="TestPoolBusinessServer.Creaters" value="10000000" />
+  </AppSettings>
+  <Middler>
+    <app name="mq" dll="Apache.NMS.ActiveMQ.dll" method="constructor" mode="instance">
+      <object name="activemq" type="Apache.NMS.ActiveMQ.ConnectionFactory">
+        <String name="BrokerUri" value="activemq:tcp://tfs:61616"/>
+      </object>
+    </app>
+    <app name="ni" method="constructor" >
+      <object name="sqlfactory" type="PublicClass.Db.Ni.SqlFactory"></object>
+      <object name="odbcfactory" type="PublicClass.Db.Ni.ODBCFactory"></object>
+      <object name="oledbfactory" type="PublicClass.Db.Ni.OleDbFactory"></object>
+      <object name="factory" type="PublicClass.Db.Ni.ODBCFactory"></object>
+      <object name="ma" type="PublicClass.IO.Config.ConfigManagerFactory.GetConfigManagerFromDirectory" method="factory" >
+        <object type="PublicClass.IO.Config.ConfigManagerFactory.GetBassConfigManager" method="factory" />
+        <String value=".\Ni\*.ni"/>
+      </object>
+      <object name="resource" type="PublicClass.Db.Ni.NiInstanceDataResource">
+        <object ref="sqlfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+        <!--<String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+      </object>
+      <object name="poolresource" type="PublicClass.Db.Ni.NiPoolDataResource">
+        <object ref="oledbfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <!--<String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+        <String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+        <int>2</int>
+      </object>
+      <object name="parameters" type="PublicClass.Db.Ni.NiDataParameters"></object>
+      <object name="template" type="PublicClass.Db.Ni.NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object name="" ref="resource"/>
+        <object name="" ref="parameters"/>
+        <object name="" ref="ma"/>
+        <!--<bool name="Transaction" value="True"/>-->
+      </object>
+    </app>
+    <app name="mpc" dll="MyProcessController.dll" method="constructor" >
+      <object name="formatter" dll="System.Messaging.dll" type="System.Messaging.XmlMessageFormatter" mode="instance">
+        <params type="String">
+          <!--<String value="PublicClass.Project.MyProcessController.TestEntity,MyProcessController"></String>-->
+          <String value="Boss.Entities.BillMessage,Boss.Entities"/>
+        </params>
+      </object>
+      <object name="queue" type="GeneralClassLibrary.Project.MyProcessController.NetMessageQueueFactory">
+        <String value="FormatName:DIRECT=OS:.\private$\test"/>
+        <object ref="formatter"/>
+      </object>
+      <object dll="Boss.Servers.dll" name="BillServer" type="Boss.Servers.BillServer">
+        <object dll="Boss.DAL.dll" type="Boss.DAL.BillFactory" />
+        <object dll="Boss.DAL.dll" type="Boss.DAL.BillDAO" />
+        <object dll="MyProcessController.dll" type="GeneralClassLibrary.Project.MyProcessController.NetMessageQueueFactory">
+          <String value="FormatName:DIRECT=OS:.\private$\test"/>
+          <object ref="formatter"/>
+        </object>
+        <object dll="MyProcessController.dll" type="GeneralClassLibrary.Project.MyProcessController.NetMessageQueue">
+          <String value="FormatName:DIRECT=OS:.\private$\test2"/>
+          <object ref="formatter"/>
+        </object>
+        <int name="timeOut" value="500"/>
+        <int name="createrNum" value="1"/>
+        <int name="createrWaitTime" value="10000"/>
+        <int name="customerNum" value="50"/>
+        <int name="customerWaitTime" value="500"/>
+        <int name="refreshWaitTime" value="60000"/>
+      </object>
+      <!--<object name="formatter2" dll="System.Messaging.dll" type="System.Messaging.XmlMessageFormatter" mode="instance">
+        <objects convert="GeneralClassLibrary.Project.MyProcessController.TestEntity.ToType">
+          <object dll="" type="System.Type.GetType" method="factory">
+            <String value="GeneralClassLibrary.Project.MyProcessController.TestEntity,MyProcessController"></String>
+          </object>
+        </objects>
+      </object>-->
+      <!--<object name="type" dll="" type="System.Type.GetType" method="factory">
+        <String value="PublicClass.Project.MyProcessController.TestEntity,MyProcessController"></String>
+      </object>-->
+    </app>
+  </Middler>
+</Config>

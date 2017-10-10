@@ -1,0 +1,3 @@
+G:\baibing\work\Test\bin\Debug\Test.exe.config
+G:\baibing\work\Test\obj\Debug\Test.exe
+G:\baibing\work\Test\obj\Debug\Test.pdb

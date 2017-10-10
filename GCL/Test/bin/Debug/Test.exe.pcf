@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <AppSettings>
+    <add key="TestPoolBusinessServer.Customers" value="300" />
+    <add key="TestPoolBusinessServer.CreaterWaitTime" value="1000" />
+    <add key="TestPoolBusinessServer.CustomerWaitTime" value="50" />
+    <add key="SendErrorEmailByMode" value="2" />
+  </AppSettings>
+  <AppSettings>
+    <add key="SendErrorEmailByMode" value="4" />
+    <add key="TestPoolBusinessServer.RefreshWaitTime" value="10000" />
+    <add key="TestPoolBusinessServer.Creaters" value="10000000" />
+  </AppSettings>
+  <Middler xmlns="http://tempuri.org/middler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="mq" dll="Apache.NMS.ActiveMQ.dll" method="constructor" mode="instance">
+      <object name="activemq" type="Apache.NMS.ActiveMQ.ConnectionFactory">
+        <String xmlns="" name="BrokerUri" value="activemq:tcp://tfs:61616"/>
+      </object>
+      <object name="type" dll="" type="System.Type.GetType" method="factory">
+        <String xmlns="" value="Test.Form1.TestE,Test"></String>
+      </object>
+    </app>
+    <app name="ni" method="constructor" >
+      <object name="sqlfactory" type="PublicClass.Db.Ni.SqlFactory"></object>
+      <object name="odbcfactory" type="PublicClass.Db.Ni.ODBCFactory"></object>
+      <object name="oledbfactory" type="PublicClass.Db.Ni.OleDbFactory"></object>
+      <object name="factory" type="PublicClass.Db.Ni.ODBCFactory"></object>
+      <object name="ma" type="PublicClass.IO.Config.ConfigManagerFactory.GetConfigManagerFromDirectory" method="factory" >
+        <object xmlns="" type="PublicClass.IO.Config.ConfigManagerFactory.GetBassConfigManager" method="factory" />
+        <String xmlns="" value=".\Ni\*.ni"/>
+      </object>
+      <object name="resource" type="PublicClass.Db.Ni.NiInstanceDataResource">
+        <object xmlns="" ref="sqlfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <String xmlns="" name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+        <!--<String value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+      </object>
+      <object name="poolresource" type="PublicClass.Db.Ni.NiPoolDataResource">
+        <object xmlns="" ref="oledbfactory"/>
+        <!--<String name="" value="Driver={sql server};server=.\LXR;database=test;uid=login_user;pwd=test;" />-->
+        <!--<String name="" value="Password =test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>-->
+        <String xmlns="" value="Provider=SQLOLEDB.1;Password=test;Persist Security Info=True;User ID=login_user;Initial Catalog=test;Data Source=.\LXR"/>
+        <int xmlns="" value="2" />
+      </object>
+      <object name="parameters" type="PublicClass.Db.Ni.NiDataParameters"></object>
+      <object name="template" type="PublicClass.Db.Ni.NiTemplate" method="constructor" mode="instance" constructorparalength="3">
+        <object xmlns="" name="" ref="resource"/>
+        <object xmlns="" name="" ref="parameters"/>
+        <object xmlns="" name="" ref="ma"/>
+        <!--<bool name="Transaction" value="True"/>-->
+      </object>
+    </app>
+    <app name="middler" dll="G:/baibing/Work/PublicClass/Test/bin/Debug/System.Messaging.dll, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" method="constructor" mode="static" package="System.Messaging">
+      <object name="formatter" type=".XmlMessageFormatter" />
+    </app>
+    <app name="log" dll="PublicClass.dll" method="constructor" mode="static" package="PublicClass.IO.Log">
+      <object name="listener1" type=".Listener">
+        <objects xmlns="" convert=".Listener.ToATrigger">
+          <object type=".LogTypeTrigger">
+            <Enum value=".LogType.INFO"/>
+          </object>
+          <!--<object type=".SourceTrigger">
+            <String value="abc"/>
+          </object>-->
+        </objects>
+        <object xmlns="" type=".LogRecord"/>
+        <object xmlns="" type=".TextFileLogResource">
+          <String value="c:\\Apply{0}.txt"/>
+          <object xmlns="" name="encoding" dll="" type="System.Text.Encoding.GetEncoding" method="factory">
+            <String value="gb2312"/>
+          </object>
+          <int value="10"/>
+          <object type=".LengthAndCronNameTrigger">
+            <int value="10"/>
+            <String value="0 0 0 * * ?"/>
+            <String value="{0:yyyyMMdd}"/>
+          </object>
+        </object>
+      </object>
+      <object name="logger2" type=".Logger" method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type=".LogRecord">
+          <Enum value=".LogType.INFO"/>
+          <bool value="true"/>
+          <bool value="true"/>
+          <bool value="true"/>
+        </object>
+        <object xmlns="" name="Listener" ref="listener1"/>
+      </object>
+      <object name="logger3" type=".LoggerFactory.GetHourTextFileLogger" method="factory" >
+        <Enum xmlns="" value=".LogType.INFO"/>
+        <bool xmlns="" value="true"/>
+        <object xmlns="" name="encoding" dll="" type="System.Text.Encoding.GetEncoding" method="factory">
+          <String value="gb2312"/>
+        </object>
+        <String xmlns="" value="c:\\apply{0}.log"/>
+      </object>
+      <object name="logger" type=".Logger" method="constructorbean" constructorparalength="1">
+        <object xmlns="" name="" type=".LogRecord">
+          <Enum value=".LogType.INFO"/>
+          <bool value="true"/>
+          <bool value="true"/>
+          <bool value="true"/>
+        </object>
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <Enum value=".LogType.ERROR"/>
+          <object xmlns="" type=".LoggerFactory.GetDayTextFileResource" method="factory">
+            <String value="c:\\Apply{0}.txt"/>
+            <String value="gb2312"/>
+          </object>
+        </object>
+        <!--<object xmlns="" name="Listener" type=".LoggerFactory.GetConsoleListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <Enum value=".LogType.TEST"/>
+        </object>-->
+        <object xmlns="" name="Listener" type=".LoggerFactory.GetWindowEventListener" method="factory">
+          <Enum value=".LogType.TEST"/>
+          <String value=""/>
+          <String value="Logger"/>
+        </object>
+      </object>
+    </app>
+    <app name="bean" dll="Test.exe" method="bean" mode="static">
+      <object name="TestE" type="Test.TestE">
+        <Params xmlns="" name="Content2">
+          <String xmlns="" name="Content" value="bcd"/>
+          <String xmlns="" name="Content2" value="efg"/>  
+        </Params>
+        <Array xmlns="" name="Content3" type="String">
+          <String xmlns="" name="Content" value="bcd"/>
+          <String xmlns="" name="Content2" value="aaaaaa"/>
+        </Array>
+      </object>
+    </app>
+  </Middler>
+</Config>

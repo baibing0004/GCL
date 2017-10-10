@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Middler xmlns="http://tempuri.org/middler.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance">
+    <app name="PWGenerater" method="constructor" dll="PWGenerater.exe">
+      <object name="SourceGenerator" type="PWGenerater.GuidSourceGenerator"/>
+      <object name="PasswordGenerator" type="PWGenerater.PWGeneratorDecorate">
+        <objects xmlns="">
+          <object name="PasswordGenerator" type="PWGenerater.PWGeneratorFormatDecorate">
+            <object xmlns="" name="PasswordGenerator" type="PWGenerater.DBPWGenerator"/>
+            <String xmlns="" value="Atelink{0}DB"/>
+          </object>
+          <object xmlns="" name="PasswordGenerator" type="PWGenerater.MD5PWGenerator"/>
+        </objects>
+      </object>
+    </app>
+  </Middler>
+</Config>
